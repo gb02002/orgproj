@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}User Profile{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profileview.css' %}">
+
+<h2>User Profile</h2>
+<div class="profile-info">
+    <table>
+        <tr>
+            <th>Name:</th>
+            <td>{{ users_data.name }}</td>
+        </tr>
+        <tr>
+            <th>SurName:</th>
+            <td>{{ users_data.surname }}</td>
+        </tr>
+        <tr>
+            <th>Email:</th>
+            <td>{{ users_data.email }}</td>
+        </tr>
+        <tr>
+            <th>Number:</th>
+            <td>{{ users_data.phone }}</td>
+        </tr>
+    </table>
+
+    <div class="edit-link">
+        <p><a href="edit/">Edit</a></p>
+        <p><a href="{% url 'password_change' %}">Change password</a> </p>
+    </div>
+
+</div>
+
+    <div class="data-container">
+        <div class="subscriptions">
+            <h3>Subscriptions:</h3>
+            <table>
+                <tr>
+                    <th>Organisation</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                </tr>
+                {% for subscription in users_data.subscriptions %}
+                <tr>
+                    <td>{{ subscription.organisation.title }}</td>
+                    <td>{{ subscription.get_sub_type_display }}</td>
+                    <td>{{ subscription.initial_transaction.amount|floatformat:"-2" }} €</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">No subscriptions available.</td>
+                </tr>
+                {% endfor %}
+            </table>
+
+
+    <!-- Элементы управления пагинацией подписок -->
+            <div class="pagination">
+                {% if users_data.subscriptions.has_previous %}
+                    <a href="?subscriptions_page={{ users_data.subscriptions.previous_page_number }}&history_page={{ users_data.history.number }}">previous</a>
+                {% endif %}
+                <span>Page {{ users_data.subscriptions.number }} of {{ users_data.subscriptions.paginator.num_pages }}.</span>
+                {% if users_data.subscriptions.has_next %}
+                    <a href="?subscriptions_page={{ users_data.subscriptions.next_page_number }}&history_page={{ users_data.history.number }}">next</a>
+                {% endif %}
+            </div>
+        </div>
+
+    <div class="history">
+            <h3>History:</h3>
+            <table>
+                <tr>
+                    <th>Organisation</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                </tr>
+                {% for transaction in users_data.history %}
+                <tr>
+                    <td>{{ transaction.organisation.title }}</td>
+                    <td>{{ transaction.payment_time|date:"d-m-Y" }}</td>
+                    <td>{{ transaction.amount|floatformat:2 }}</td>
+                    <td>{{ transaction.subscription|default:"Single Transaction" }}</td>
+                    <td>{{ transaction.get_status_display }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No transactions available.</td>
+                </tr>
+                {% endfor %}
+            </table>
+
+            <!-- Элементы управления пагинацией истории -->
+            <div class="pagination">
+                {% if users_data.history.has_previous %}
+                    <a href="?history_page={{ users_data.history.previous_page_number }}&subscriptions_page={{ users_data.subscriptions.number }}">previous</a>
+                {% endif %}
+                <span>Page {{ users_data.history.number }} of {{ users_data.history.paginator.num_pages }}.</span>
+                {% if users_data.history.has_next %}
+                    <a href="?history_page={{ users_data.history.next_page_number }}&subscriptions_page={{ users_data.subscriptions.number }}">next</a>
+                {% endif %}
+            </div>
+        </div>
+
+{% endblock %}

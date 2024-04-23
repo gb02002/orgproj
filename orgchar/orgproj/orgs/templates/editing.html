@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<title>{{ title }}</title>
+<meta name="csrf-token" content="{% csrf_token %}">
+{% endblock %}
+
+{% block content %}
+
+<h2 class="page-title">Your records</h2>
+<h4 class="page-subtitle">Here you can add/edit/delete your organisations and locations</h4>
+
+<a href="{% url 'add-org-1' %}" class="button-link add-org">
+                    Add org<img src="{% static 'images/plus.png' %}" alt="Add location" class="small-image">
+                </a>
+{% for org in orgs %}
+<div class="org-info">
+    <div class="org-header text-increase" onclick="handleOrgHeaderClick(event, {{ org.pk }})">
+        {{ org }}
+        <div class="button-container">
+            <div class="button-group">
+                <a href="{% url 'add-loc' pk=org.pk %}" class="button-link add-location">
+
+                    <img src="{% static 'images/plus.png' %}" alt="Add location" class="small-image">
+                </a>
+
+                <a href="{% url 'edit-org' pk=org.pk %}" class="button-link edit">
+                    <img src="{% static 'images/pencil.png' %}" alt="Editing" class="small-image">
+                </a>
+
+                <a href="{% url 'del-org' pk=org.pk %}" class="button-link delete">
+                    <img src="{% static 'images/delete.png' %}" alt="Delete" class="small-image">
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="org-locations" id="org-{{ org.pk }}-locations" style="display: none;">
+        {% for location in org.locations.all %}
+        <div class="location" id="location-{{ location.pk }}" onclick="handleLocHeaderClick(event, {{ location.pk }})">
+            {{ location.location_name }}
+
+            <div class="button-container">
+                <div class="button-group">
+                    <a href="{% url 'add-loc-media' pk=location.location %}" class="button-link add-location">
+                        <img src="{% static 'images/plus.png' %}" alt="Add location" class="small-image">
+                    </a>
+
+                    <a href="{% url 'edit-loc' pk=location.location %}" class="button-link edit">
+                        <img src="{% static 'images/pencil.png' %}" alt="Editing" class="small-image">
+                    </a>
+
+                    <a href="{% url 'del-loc' pk=location.location %}" class="button-link delete">
+                        <img src="{% static 'images/delete.png' %}" alt="Delete" class="small-image">
+                    </a>
+                </div>
+            </div>
+
+
+            <!-- Здесь можете добавить дополнительную информацию, которую нужно скрывать/показывать -->
+
+            <div class="location-details" id="location-details-{{ location.pk }}" style="display: none;">
+                <ul>
+                    <li><strong>Address:</strong> {{ location.address }}</li>
+                    <li><strong>Open Hours:</strong> {{ location.open_hours }}</li>
+                </ul>
+                {% for media in location.media.all %}
+                <div class="media-info" onclick="handlerMediaHeaderClick(event, {{ media.media_id }})">
+                    {{ media.media_id }}
+
+                    <div class="button-container">
+                        <div class="button-group">
+                            <a href="#" class="button-link add-location">
+                                <img src="{% static 'images/plus.png' %}" alt="Add location" class="small-image">
+                            </a>
+
+                            <a href="{% url 'edit-loc-media' pk=media.media_id %}" class="button-link edit">
+                                <img src="{% static 'images/pencil.png' %}" alt="Editing" class="small-image">
+                            </a>
+
+                            <a href="{% url 'del-loc-media' pk=media.media_id %}" class="button-link delete">
+                                <img src="{% static 'images/delete.png' %}" alt="Delete" class="small-image">
+                            </a>
+                        </div>
+                    </div>
+
+
+                    <div class="media-details" id="media-details-{{ media.media_id }}" style="display: none;">
+                        <ul>
+                            <li>Description: {{ media.description }}</li>
+                            <li>{{ media.image }}</li>
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endfor %}
+
+
+<script>
+    var isLinkClicked = false;
+
+    function handleOrgHeaderClick(event, orgId) {
+        if (!isLinkClicked) {
+            toggleLocations(orgId);
+        }
+        isLinkClicked = false; // Сбрасываем значение isLinkClicked после обработки клика
+    }
+
+    function toggleLocations(orgId) {
+        var locationsDiv = document.getElementById('org-' + orgId + '-locations');
+        if (locationsDiv.style.display === 'none' || locationsDiv.style.display === '') {
+            locationsDiv.style.display = 'block';
+        } else {
+            locationsDiv.style.display = 'none';
+        }
+    }
+
+    function handleLinkClick(event) {
+        event.preventDefault(); // Предотвращаем стандартное действие при клике на ссылку
+        isLinkClicked = true; // Устанавливаем флаг, что была кликнута ссылка
+    }
+
+</script>
+
+
+<script>
+    function handleLocHeaderClick(event, locationId) {
+    // Проверяем, был ли клик на самом элементе .location, а не на дочерних элементах
+    if (event.target.classList.contains('location')) {
+        toggleLocation(locationId);
+    }
+}
+
+function handlerMediaHeaderClick(event, mediaId) {
+    // Проверяем, был ли клик на самом элементе .media-info, а не на дочерних элементах
+    if (event.target.classList.contains('media-info')) {
+        toggleMedia(mediaId);
+    }
+}
+
+function toggleMedia(mediaId) {
+    var mediaDetailsDiv = document.getElementById('media-details-' + mediaId);
+    if (mediaDetailsDiv.style.display === 'none') {
+        mediaDetailsDiv.style.display = 'block';
+    } else {
+        mediaDetailsDiv.style.display = 'none';
+    }
+}
+
+function toggleLocation(locationId) {
+    var locationDetailsDiv = document.getElementById('location-details-' + locationId);
+    if (locationDetailsDiv.style.display === 'none') {
+        locationDetailsDiv.style.display = 'block';
+    } else {
+        locationDetailsDiv.style.display = 'none';
+    }
+}
+</script>
+
+{% endblock %}

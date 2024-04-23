@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{title}}
+{% endblock %}
+
+{% block head %}
+  {% for form in locations_formset %}
+        {{ form.media }}
+{% endfor %}
+{% block javascript %}
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript">
+      (function ($){
+          $(document).on("google_point_map_widget:marker_create", function (e, lat, lng, locationInputElem, mapWrapID) {
+              console.log("EVENT: marker_create"); // django widget textarea widget (hidden)
+              console.log(locationInputElem); // django widget textarea widget (hidden)
+              console.log(lat, lng); // created marker coordinates
+              console.log(mapWrapID); // map widget wrapper element ID
+          });
+
+          $(document).on("google_point_map_widget:marker_change", function (e, lat, lng, locationInputElem, mapWrapID) {
+              console.log("EVENT: marker_change"); // django widget textarea widget (hidden)
+              console.log(locationInputElem); // django widget textarea widget (hidden)
+              console.log(lat, lng);  // changed marker coordinates
+              console.log(mapWrapID); // map widget wrapper element ID
+          });
+
+          $(document).on("google_point_map_widget:marker_delete", function (e, lat, lng, locationInputElem, mapWrapID) {
+              console.log("EVENT: marker_delete"); // django widget textarea widget (hidden)
+              console.log(locationInputElem); // django widget textarea widget (hidden)
+              console.log(lat, lng);  // deleted marker coordinates
+              console.log(mapWrapID); // map widget wrapper element ID
+          })
+
+          $(document).on("google_point_map_widget:place_changed", function (e, place, lat, lng, locationInputElem, mapWrapID) {
+              console.log("EVENT: place_changed"); // django widget textarea widget (hidden)
+              console.log(place);
+              console.log(locationInputElem); // django widget textarea widget (hidden)
+              console.log(lat, lng); // created marker coordinates
+              console.log(mapWrapID); // map widget wrapper element ID
+          });
+          console.log($("#location-map-elem").data("googleMapObj"));
+          console.log($("#location-map-elem").data("googleMapWidgetObj"));
+      })(jQuery)
+  </script>
+{% endblock javascript %}
+
+{% endblock %}
+
+
+{% block content %}
+ <h2>Add Organisation</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ org_form.as_p }}
+
+    <!-- Местоположения -->
+    {{ locations_formset.management_form }}
+
+<fieldset>
+  <legend>Locations</legend>
+  <div class="locations-formset">
+    {{ locations_formset.management_form }}
+    {% for form in locations_formset.forms %}
+    <div class="location-form">
+      {{ form.as_p }}
+
+      <fieldset>
+        <legend>Location Media</legend>
+        <div class="media-formset">
+          {{ form.media_formset.management_form }}
+          {% for media_form in form.media_formset.forms %}
+          <div class="media-form">
+            {{ media_form.as_p }}
+            {{ media_form.DELETE }}
+            {{ media_form.errors }}
+          </div>
+          {% endfor %}
+          <button type="button" class="add-media">Добавить медиа</button>
+        </div>
+      </fieldset>
+    </div>
+    {% endfor %}
+    <button type="button" id="add-location">Добавить еще одно местоположение</button>
+  </div>
+</fieldset>
+
+
+    <button type="submit">Submit</button>
+  </form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Добавляем обработчик события для кнопки "Добавить еще одно местоположение"
+    document.getElementById('add-location').addEventListener('click', addLocationForm);
+  });
+
+function addLocationForm() {
+    const formCount = parseInt(document.getElementById('id_locations-TOTAL_FORMS').value);
+    const locationFormHtml = document.getElementById('empty-location-form').innerHTML.replace(/__prefix__/g, formCount);
+    document.getElementById('extra-locations').insertAdjacentHTML('beforeend', locationFormHtml);
+    document.getElementById('id_locations-TOTAL_FORMS').value = formCount + 1;
+  }
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Добавление дополнительной формы медиа при нажатии на кнопку "Добавить медиа"
+    document.querySelectorAll('.add-media').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        const formset = this.parentElement;
+        const totalFormsInput = formset.querySelector('input[name$=TOTAL_FORMS]');
+        const totalForms = parseInt(totalFormsInput.value);
+        const newMediaForm = formset.querySelector('.media-form').cloneNode(true);
+
+        // Очистка значений полей новой формы медиа
+        newMediaForm.querySelectorAll('input[type=text], input[type=file], textarea').forEach(function(input) {
+          input.value = '';
+        });
+
+        // Увеличение значения TOTAL_FORMS и добавление новой формы медиа
+        totalFormsInput.value = totalForms + 1;
+        formset.insertBefore(newMediaForm, this);
+      });
+    });
+  });
+</script>
+
+
+<!-- Пустая форма местоположения для использования в JavaScript -->
+<div id="empty-location-form" style="display: none;">
+  {{ location_formset.empty_form.as_p }}
+</div>
+{% endblock %}
+
+{% block head_scripts %}
+
+{% endblock %}

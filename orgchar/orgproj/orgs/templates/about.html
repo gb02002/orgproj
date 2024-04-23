@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+    <h2>About Us</h2>
+    <p>Этот проект является некоммерческим учебным проектом, созданным для демонстрации различных функций и возможностей веб-разработки. Мы стремимся предоставить качественные материалы и инструменты для обучения и развития.</p>
+    
+    <h3>Есть вопросы?</h3>
+    <p>Если у вас есть вопросы, предложения или вы хотите узнать больше о проекте, не стесняйтесь обращаться к нам. Мы всегда открыты для общения и готовы помочь!</p>
+
+    <h4>Связаться с нами</h4>
+    <form action="mailto:your_email@example.com" method="post" enctype="text/plain">
+        <div class="form-group">
+            <label for="name">Имя:</label>
+            <input type="text" id="name" name="name" placeholder="Ваше имя" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Электронная почта:</label>
+            <input type="email" id="email" name="email" placeholder="Ваш email" required>
+        </div>
+        <div class="form-group">
+            <label for="message">Сообщение:</label>
+            <textarea id="message" name="message" placeholder="Ваше сообщение" rows="4" required></textarea>
+        </div>
+        <button type="submit">Отправить</button>
+    </form>
+{% endblock %}

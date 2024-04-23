@@ -1,0 +1,80 @@
+{% load static %}
+{% load cache %}
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Charity aggregator in the Netherlands">
+    <meta name="keywords" content="charity, nl, netherlands">
+    <title>{% block title %} Charity Aggregator {% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/admin.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ed.css' %}">
+    {% block head %}{% endblock %}
+    {% block head_scripts %}{% endblock %}
+</head>
+<body>
+    <header>
+        <!-- Шапка сайта: логотип, навигационное меню и другие элементы -->
+        {% cache 900 "language_menu" %}
+            <div class="language-switch">
+                <img src="{% static 'images/uk.png' %}" alt="Switch Language">
+                <img src="{% static 'images/nl.png' %}" alt="Switch Language">
+            </div>
+        {% endcache %}
+        {% block nav %}
+            <!-- Навигационное меню, которое может включать ссылки на разные разделы сайта -->
+            <nav>
+                    <!-- Навигационное меню, которое может включать ссылки на разные разделы сайта -->
+                 <ul>
+                    <li><a href="{% url 'map' %}">Map</a></li>
+                    <li class="dropdown">
+                        <a href="{% url 'organisation_list_filtered' %}">List &#9662;</a>
+                    </li>
+                    <li><a href="{% url 'edit-choice' %}">For Orgs</a></li>
+                    <li class="dropdown">
+                        <a href="{% url 'about' %}">About &#9662;</a>
+                        <ul class="dropdown-content">
+                            <li><a href="#">Subpage 1</a></li>
+                            <li><a href="#">Subpage 2</a></li>
+                        </ul>
+                    </li>
+                    {% if user.is_authenticated %}
+                        <!-- Показать ссылку на профиль, если пользователь залогинен -->
+                        <li><a href="{% url 'profile' %}">Profile</a></li>
+                        <!-- Показать ссылку на выход, если пользователь залогинен -->
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                        <!-- Показать ссылку на вход, если пользователь не залогинен -->
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                        <!-- Показать ссылку на регистрацию, если пользователь не залогинен -->
+                        <li><a href="{% url 'registration_view' %}">Register</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+
+        {% endblock %}
+    </header>
+
+
+    <main>
+        {% block content %}{% endblock %}
+        <!-- Здесь будет вставлен уникальный контент для каждой страницы -->
+    </main>
+
+    <footer>
+        <!-- Подвал сайта: информация о правилах использования, контактная информация и др. -->
+        <p>&copy; 2023 Nl charity</p>
+        <p><a href="/">Домашняя страница</a> | <a href="{% url 'about' %}">About</a></p>
+    </footer>
+
+    <!-- Здесь можно добавить скрипты, которые должны быть доступны на всех страницах -->
+
+{% block javascript %}{% endblock %}
+
+</body>
+</html>

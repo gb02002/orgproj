@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block head_scripts %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/lists.css' %}">
+{% endblock %}
+
+{% block content %}
+<h2>{{ title }}</h2>
+
+<ul class="organisation-list">
+    {% if filters %}
+        {% for organisation in page_obj %}
+            {% if organisation.filter_id in filters %}
+                <li class="organisation-item">
+                    <div class="organisation-info">
+                        <span>{{ organisation.title }}</span>
+                        <span>{{ organisation.web }}</span>
+                        <span>{{ organisation.phone }}</span>
+                        <!-- Формирование URL через slug (pk+title) -->
+                        <a href="{% url 'organisation-detail' pk=organisation.pk slug=organisation.title|slugify %}" class="organisation-link">Перейти к организации</a>
+                    </div>
+
+                </li>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        {% for organisation in page_obj %}
+            <li class="organisation-item">
+                <div class="organisation-info">
+                    <span>{{ organisation.title }}</span>
+                    <span>{{ organisation.web }}</span>
+                    <span>{{ organisation.phone }}</span>
+                    <!-- Формирование URL через slug (pk+title) -->
+                    <a href="{% url 'organisation-detail' pk=organisation.pk slug=organisation.title|slugify %}" class="organisation-link">Перейти к организации</a>
+                </div>
+            </li>
+        {% endfor %}
+    {% endif %}
+</ul>
+
+
+<nav>
+    <ul class="pagination">
+        {% for p in page_obj.paginator.page_range %}
+        <li>
+            <a href="?page={{ p }}">{{ p }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</nav>
+
+{% endblock %}
+

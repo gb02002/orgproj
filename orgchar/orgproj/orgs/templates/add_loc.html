@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Add Location
+{% endblock %}
+{% block head %}
+{{form.media}}
+{% endblock %}
+
+
+{% block content %}
+  <h2>Add location</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+  </form>
+{% endblock %}
