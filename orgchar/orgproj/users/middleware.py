@@ -1,14 +1,14 @@
 # This is middleware for analytics
-import json
+import ujson
 import os
 from datetime import datetime
 from typing import NamedTuple, Tuple
 import uuid
+from uuid_extensions import uuid7str
 import redis
 from django.conf import settings
 import time
 import logging
-from django.utils import timezone
 from redis import RedisError
 
 from users.tasks import alert_error_mail
@@ -22,19 +22,20 @@ time_to_live = 60 * 3
 # logger.setLevel(logging.WARNING)
 
 class WebStatistics(NamedTuple):
+    time_stamp: str
     session_id: str
     path_info: str
     response_code: int
     time_for_response: float
-    time_stamp: datetime
-    User_Agent: str
-    ip_addr: str
-    referer: str
+    User_Agent: str = ''
+    ip_addr: str = ''
+    referer: str = ''
 
     def __str__(self):
         return (
-            f"WebStats(session_id={self.session_id}, path_info={self.path_info}, response_code={self.response_code}, "
-            f"time_for_response={self.time_for_response}, time_stamp={self.time_stamp})")
+            f"WebStats(time_stamp={self.time_stamp}), session_id={self.session_id}, path_info={self.path_info}, "
+            f"response_code={self.response_code}, time_for_response={self.time_for_response}, "
+            f"User_Agent={self.User_Agent}), ip_addr={self.ip_addr}), referer={self.referer})")
 
 
 class StatsMiddleware:
@@ -88,17 +89,19 @@ class StatsMiddleware:
         session_id = request.session.session_key
 
         web_stat = WebStatistics(
+            time_stamp=uuid7str(),
             session_id=session_id,
             path_info=request.path_info,
             response_code=response.status_code,
             time_for_response=handling_time,
-            time_stamp=timezone.now().strftime("%Y-%m-%d %H:%M:%S"),
             User_Agent=user_agent,
             ip_addr=ip_address,
             referer=referer
         )
 
-        web_stat_json = json.dumps(web_stat)
+        logger.warning(web_stat)
+
+        web_stat_json = ujson.dumps(web_stat)
         key = f'web_stat:{unique_identifier}'
 
         return key, web_stat_json
