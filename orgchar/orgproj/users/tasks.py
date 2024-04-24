@@ -64,7 +64,7 @@ def new_agent_email(user: User):
     return email
 
 
-def today_logs_email():
+def today_logs_email(e):
     email = EmailMessage()
     email['Subject'] = "Today's logs"
     email['From'] = SMTP_USER
@@ -76,7 +76,8 @@ def today_logs_email():
         '<div>'
         f'<h2>Hello, there are logs for {current_time}</h2>'  # Вставляем время в заголовок
         '<ul>'
-
+        "We've got wierd stuff going here, unhandable and unexpecting:" 
+        f"{e}"
         '</ul>'
         '<p>One more day</p>'
         '<p>Sincerely,</p>'
@@ -143,8 +144,8 @@ def send_todays_logs():
 
 
 @celery.task
-def alert_error():
-    email = today_logs_email()
+def alert_error_mail(e):
+    email = today_logs_email(e)
     with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT) as server:
         server.login(SMTP_USER, SMTP_PASSWORD)
         server.send_message(email)

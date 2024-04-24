@@ -1,3 +1,5 @@
+import uuid
+
 from django.shortcuts import redirect
 import logging
 
@@ -10,6 +12,8 @@ class CustomMiddlewareToken:
         self._get_response = get_response
 
     def __call__(self, request):
+        request.session.set_expiry(60 * 30)
+
         response = self._get_response(request)
         # Код, выполняемый при обработке каждого запроса после представления
         return response
@@ -20,6 +24,13 @@ class CustomMiddlewareToken:
                 # Надо добавить генерацию email о подозрительной активности
                 return redirect('edit-choice')
             logger.warning(f"Suspicious activity of {request.user}")
+
+    # @staticmethod
+    # def set_custom_stats_cookie(request):
+    #     if request.session.get("stats", False):
+    #         request.session["stats"] = uuid.uuid4()
+
+
 
 
 # class CustomMiddlewareToken:

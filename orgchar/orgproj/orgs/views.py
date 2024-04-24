@@ -235,12 +235,11 @@ class ChoiceEditView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         """Обязательно надо добавить task который сносит этот кеш после updates"""
         # Генерация токена
-        edit_token = get_random_string(length=32)
-        # Сохранение токена в сессии пользователя
-        request.session['edit_token'] = edit_token
-        # Возврат результата от родительского метода get()
-        # logger.debug("sending choice-edit")
-        return super().get(request, *args, **kwargs)
+        response = super().get(request, *args, **kwargs)
+        if response.cookies.get('edit_token', True):
+            edit_token = get_random_string(length=32)
+            response.set_cookie('edit_token', edit_token, max_age=600)
+        return response
 
 
 # class AddOrgView(LoginRequiredMixin, FormView):
