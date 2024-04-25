@@ -14,8 +14,8 @@ from redis import RedisError
 from users.tasks import alert_error_mail
 
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
-# logger.setLevel(logging.WARNING)
+# logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.WARNING)
 time_to_live = 60 * 3
 
 
@@ -99,7 +99,7 @@ class StatsMiddleware:
             referer=referer
         )
 
-        logger.warning(web_stat)
+        logger.debug(web_stat)
 
         web_stat_json = ujson.dumps(web_stat)
         key = f'web_stat:{unique_identifier}'

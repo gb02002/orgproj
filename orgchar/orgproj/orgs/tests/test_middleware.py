@@ -1,12 +1,17 @@
 import logging
+from importlib import import_module
 from unittest.mock import Mock
-
+from django.contrib.sessions.backends.db import SessionStore
 from django.test import TestCase
 from django.test.client import RequestFactory, Client
 from django.urls import reverse
 from django.contrib.auth.models import User
 
+from orgproj import settings
 from orgs.middleware import CustomMiddlewareToken
+logger = logging.getLogger(__name__)
+# logger.setLevel(logging.WARNING)
+logger.setLevel(logging.DEBUG)
 
 
 class CustomMiddlewareTokenTestCase(TestCase):
@@ -15,17 +20,23 @@ class CustomMiddlewareTokenTestCase(TestCase):
     dunno how to work with passing mock to _get_response and parsing TypeNone after RequestFactory fuck it
     """
     def test_process_view_without_edit_choice(self):
-        mock_get_response = Mock(return_value=None)
+        """"    works   """
+        mock_get_response = Mock()
 
-        middleware = CustomMiddlewareToken(get_response=mock_get_response)
         request = RequestFactory().get('/')
-        request.session = {}
 
+        session = SessionStore()
+
+        request.session = session
+
+        middleware = CustomMiddlewareToken(mock_get_response)
         middleware(request)
 
+        # Проверяем, что в сессию не добавлен токен
         self.assertNotIn('edit_token', request.session)
 
     def test_token_middleware_no_token(self):
+        """"    works   """
         # Создаем клиент и пользователя
         user = User.objects.create_user(username='username', password='password')
         client = Client()
@@ -43,6 +54,7 @@ class CustomMiddlewareTokenTestCase(TestCase):
         # def test_token_middleware_no_token(self):
 
     def test_token_middleware_no_token_edit_choice(self):
+        """"    works   """
         User.objects.create_user(username='username', password='password')
         client = Client()
         client.login(username='username', password='password')
@@ -53,6 +65,7 @@ class CustomMiddlewareTokenTestCase(TestCase):
         # self.assertIn('edit_token', response.session)
 
     def test_token_middleware_with_token(self):
+        """"    works   """
         User.objects.create_user(username='username', password='password')
         client = Client()
         client.login(username='username', password='password')

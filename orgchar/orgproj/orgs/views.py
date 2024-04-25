@@ -234,9 +234,12 @@ class ChoiceEditView(LoginRequiredMixin, TemplateView):
     # @method_decorator(cache_page(15 * 60, key_prefix='agent_view'))
     def get(self, request, *args, **kwargs):
         """Обязательно надо добавить task который сносит этот кеш после updates"""
+        request_cookies = request.COOKIES
         # Генерация токена
         response = super().get(request, *args, **kwargs)
-        if response.cookies.get('edit_token', True):
+        for key, value in request_cookies.items():
+            response.set_cookie(key, value)
+        if not response.cookies.get('edit_token', False):
             edit_token = get_random_string(length=32)
             response.set_cookie('edit_token', edit_token, max_age=600)
         return response

@@ -20,7 +20,7 @@ class CustomMiddlewareToken:
 
     def process_view(self, request, view_func, view_args, view_kwargs):
         if '/edit-choice/' in request.path and not request.path.endswith('/edit-choice/'):
-            if 'edit_token' not in request.session:
+            if 'edit_token' not in request.COOKIES:
                 # Надо добавить генерацию email о подозрительной активности
                 return redirect('edit-choice')
             logger.warning(f"Suspicious activity of {request.user}")

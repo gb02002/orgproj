@@ -1,6 +1,7 @@
 1. Сделать возможность отображения и раскрытия информации по отдельным транзакциям и подпискам. Предполагаю, что это надо сделать после подключения шлюза из-за более подробного понимая очередей, статусов, переводов и тд.
 
 
+
 Сейчас надо проработать создание мок-шлюза.
 
 
@@ -293,8 +294,55 @@
         Почта
         Начать celery
 
-    21
+    23
         1. При регистрации отправить мне имеил
         2. Отчет за день. 
         3. Высылка критичных сообщений
         4. Небольшая веб-аналитика
+
+        Morning. Tasks for today:
+        
+            1. Перерефакторить 6 view в один модульный
+            2. Продумать middleware(просто стор вренени и путей хотя бы), создать пуш redis, разметить таблицу
+            3. Подвязать это с celery
+
+    24.
+        1. Написать скрипт
+        2. Разметить таблицу
+        3. Подружить
+
+
+    session_id: str
+    path_info: str
+    response_code: int
+    time_for_response: float
+    time_stamp: datetime
+    User_Agent: str = ''
+    ip_addr: str = ''
+    referer: str = ''
+    
+    Разметка табоицы:
+
+
+
+        CREATE TABLE stats;
+
+    1. Cron
+    2. gunicorn
+    2. Docker(django + postgres + cron + external vals + redis + gunicorn)
+
+    Gunicorn + nginx works, static works, postgres is populated by cron, celery works, smtp works, redis works, cache works.
+
+    25.
+        
+        resols:
+            1. Find out how systemd works, how and what should become deamons, other .sh and basic ci/cd. All should work automatically after reboot, zero movements.
+            2. DOOOOOOOOOOOOOOCCKEERRRRRRRRRRRRRRR COMPOSE ))))))))))))
+            3. testssssss)
+
+            
+            Утро: 
+            1) ABC
+            2) рефакторинг(db, allas)
+            3) тесты
+            4)env

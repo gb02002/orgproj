@@ -6,6 +6,7 @@ orgchar/orgproj/orgproj/celery.py
 static/
 media/
 *.log
+*.tar.gz
 *.js
 .log
 __pycache__/
@@ -15,6 +16,6 @@ __pycache__/
 *.pyo
 doc.md
 docker-compose.yml
-
-
+/logging/
+*.conf.py
 
