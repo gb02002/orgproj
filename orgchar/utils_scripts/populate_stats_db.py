@@ -46,7 +46,6 @@ for key in redis_conn.scan_iter(match=redis_key_pattern):
 
         pg_cursor.execute(insert_query, clean_data)
         pg_conn.commit()
-
         redis_conn.delete(key)
 # Закрытие соединений
 pg_cursor.close()
