@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 {% block title %}
-    Add Location
+    {% trans 'Add Location' %}
 {% endblock %}
 {% block head %}
 {{form.media}}
@@ -9,10 +9,10 @@
 
 
 {% block content %}
-  <h2>Add location</h2>
+  <h2>{% trans 'Add Location' %}</h2>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Submit</button>
+    <button type="submit">{% trans 'Submit' %}</button>
   </form>
 {% endblock %}

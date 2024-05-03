@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
+{% block title %}All organisations{% endblock title %}
 {% load static %}
 {% block head_scripts %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/lists.css' %}">
 {% endblock %}
 
 {% block content %}
-<h2>{{ title }}</h2>
+<h2>All charity organisations:</h2>
 
 <ul class="organisation-list">
     {% if filters %}
@@ -15,10 +16,8 @@
                 <li class="organisation-item">
                     <div class="organisation-info">
                         <span>{{ organisation.title }}</span>
-                        <span>{{ organisation.web }}</span>
-                        <span>{{ organisation.phone }}</span>
-                        <!-- Формирование URL через slug (pk+title) -->
-                        <a href="{% url 'organisation-detail' pk=organisation.pk slug=organisation.title|slugify %}" class="organisation-link">Перейти к организации</a>
+                        <span>{{ organisation.desc|slice:":50" }}</span>
+                        <a href="{% url 'organisation-detail' pk=organisation.pk slug=organisation.title|slugify %}" class="organisation-link">Go to details</a>
                     </div>
 
                 </li>
@@ -28,10 +27,8 @@
         {% for organisation in page_obj %}
             <li class="organisation-item">
                 <div class="organisation-info">
-                    <span>{{ organisation.title }}</span>
-                    <span>{{ organisation.web }}</span>
-                    <span>{{ organisation.phone }}</span>
-                    <!-- Формирование URL через slug (pk+title) -->
+                        <h4>{{ organisation.title }}</h4>
+                        <h6>{{ organisation.desc|slice:"0:300" }}</h6>
                     <a href="{% url 'organisation-detail' pk=organisation.pk slug=organisation.title|slugify %}" class="organisation-link">Перейти к организации</a>
                 </div>
             </li>
@@ -40,15 +37,34 @@
 </ul>
 
 
-<nav>
-    <ul class="pagination">
-        {% for p in page_obj.paginator.page_range %}
+{% if page_obj.has_other_pages %}
+<ul class="pagination">
+    {% if page_obj.has_previous %}
         <li>
-            <a href="?page={{ p }}">{{ p }}</a>
+        <a href="?page=1">first | </a>
+        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
         </li>
-        {% endfor %}
-    </ul>
-</nav>
+    {% endif %}
 
+    {% for p in page_obj.paginator.page_range %}
+        {% if p == page_obj.number|add:-3 %}
+            <li><span>...</span></li>
+        {% elif page_obj.number == p %}
+            <li class="page-num page-num-selected">{{ p }}</li>
+        {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+            <li><a href="?page={{ p }}">{{ p }}</a></li>
+        {% elif p == page_obj.number|add:3 %}
+            <li><span>...</span></li>
+        {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+    <li>
+        <a href="?page={{ page_obj.next_page_number }}">next | </a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">last</a>
+    </li>
+    {% endif%}
+</ul>
+{% endif %}
 {% endblock %}
 

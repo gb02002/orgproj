@@ -1,0 +1,229 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-03 17:22+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: users/templates/about.html:3
+msgid "About"
+msgstr "О нас"
+
+#: users/templates/about.html:7
+msgid "About Us"
+msgstr "О нас"
+
+#: users/templates/about.html:10
+msgid "The 'About' section also includes additional information."
+msgstr "Раздел 'О нас' также содержит дополнительную информацию."
+
+#: users/templates/about.html:13
+msgid "Do you have any questions?"
+msgstr "Остались вопросы?"
+
+#: users/templates/about.html:15
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "        If you have any questions, suggestions, or if you would like to "
+#| "learn more about the project,\n"
+#| "        please don't hesitate to reach out to us. We are always open for "
+#| "communication and ready to assist!\n"
+#| "    "
+msgid ""
+"If you have any questions, suggestions, or if you would like to learn more "
+"about the project,"
+msgstr ""
+"Если у вас есть какие-либо вопросы, предложения или если вы хотите узнать "
+"больше о проекте,\n"
+" пожалуйста, не стесняйтесь обращаться к нам. Мы всегда открыты для общения "
+"и готовы помочь!\n"
+
+#: users/templates/about.html:16
+msgid ""
+"please don't hesitate to reach out to us. We are always open for "
+"communication and ready to assist!"
+msgstr ""
+"пожалуйста, не стесняйтесь обращаться к нам. Мы всегда открыты для общения и "
+"готовы помочь!"
+
+#: users/templates/about.html:19
+msgid "Contact us:"
+msgstr "Наши контакты:"
+
+#: users/templates/about.html:22
+msgid "Name:"
+msgstr "Имя:"
+
+#: users/templates/about.html:23
+msgid "Your name"
+msgstr "Ваше имя"
+
+#: users/templates/about.html:26
+msgid "Email:"
+msgstr "Email:"
+
+#: users/templates/about.html:27
+msgid "Your email"
+msgstr "Ваш email"
+
+#: users/templates/about.html:30
+msgid "Message:"
+msgstr "Сообщение:"
+
+#: users/templates/about.html:31
+msgid "Your message"
+msgstr "Ваше сообщение"
+
+#: users/templates/about.html:33
+msgid "Send"
+msgstr "Отправить"
+
+#: users/templates/edit_password.html:3 users/templates/edit_password.html:6
+msgid "Edit password"
+msgstr "Редактировать пароль"
+
+#: users/templates/edit_password.html:10
+#: users/templates/password_change_form.html:14
+msgid "Change password"
+msgstr "Измените пароль"
+
+#: users/templates/edit_profile.html:3 users/templates/edit_profile.html:7
+msgid "Edit profile"
+msgstr "Редактировать профиль"
+
+#: users/templates/edit_profile.html:11
+msgid "Save changes"
+msgstr "Сохранить изменения"
+
+#: users/templates/login.html:5 users/templates/login.html:9
+#: users/templates/pass_reset_complete.html:8
+msgid "Log in"
+msgstr "Войти"
+
+#: users/templates/login.html:10
+msgid "Forgot password?"
+msgstr "Забыли пароль?"
+
+#: users/templates/pass_reset_complete.html:4
+msgid "Password is changed!"
+msgstr "Пароль изменен!"
+
+#: users/templates/pass_reset_complete.html:6
+msgid "Congratulations!"
+msgstr "Поздравляю!"
+
+#: users/templates/pass_reset_complete.html:7
+msgid "You have successfully changed your account password. Use it to "
+msgstr "Вы успешно изменили пароль своего аккаунта. Используйте его для"
+
+#: users/templates/pass_reset_confirm.html:4
+msgid "New password:"
+msgstr "Новый пароль:"
+
+#: users/templates/pass_reset_confirm.html:14
+msgid "Save"
+msgstr "Сохранить"
+
+#: users/templates/pass_reset_done.html:5
+msgid "Password reset:"
+msgstr "Сброс пароля:"
+
+#: users/templates/pass_reset_form.html:4
+msgid "Password reset"
+msgstr "Сброс пароля"
+
+#: users/templates/pass_reset_form.html:13
+msgid "Send by email:"
+msgstr "Отправить по email:"
+
+#: users/templates/password_change_done.html:4
+msgid "Password is successfully changed!"
+msgstr "Пароль успешно изменен!"
+
+#: users/templates/password_change_done.html:5
+msgid "You have changed your password."
+msgstr "Вы изменили свой пароль."
+
+#: users/templates/password_change_done.html:5
+msgid "Back to profile."
+msgstr "Вернуться в профиль."
+
+#: users/templates/password_change_form.html:4
+msgid "Change your password:"
+msgstr "Измените ваш пароль:"
+
+#: users/templates/password_reset_email.html:2
+#, python-format
+msgid ""
+"You're receiving this email because you requested a password reset for your "
+"user account at %(site_name)s."
+msgstr ""
+"Вы получили этот email, потому что запросили сброс пароля на %(site_name)s."
+
+#: users/templates/password_reset_email.html:4
+msgid "Please go to the following page and choose a new password:"
+msgstr "Проследуйте на данную страницу и выберите новый пароль:"
+
+#: users/templates/password_reset_email.html:8
+msgid "Your username, in case you’ve forgotten:"
+msgstr "Ваш username, на случай, если Вы забыли:"
+
+#: users/templates/password_reset_email.html:10
+msgid "Thanks for using our site!"
+msgstr "Спасибо за использование нашего сайта!"
+
+#: users/templates/password_reset_email.html:12
+#, python-format
+msgid "The %(site_name)s team"
+msgstr ""
+
+#: users/templates/registration.html:5
+msgid "Register here:"
+msgstr "Зарегистрируйтесь здесь:"
+
+#: users/templates/registration.html:17
+msgid "Submit"
+msgstr "Подтвердить"
+
+#~ msgid ""
+#~ "\n"
+#~ "    This project is a non-commercial educational project created to "
+#~ "demonstrate various functions and\n"
+#~ "        capabilities of web development. The 'About' section also "
+#~ "includes additional information.\n"
+#~ "    "
+#~ msgstr ""
+#~ " Этот проект - некоммерческий образовательный проект, созданный для "
+#~ "демонстрации различных функций и\n"
+#~ " возможностей веб-разработки. Раздел 'О нас' также содержит "
+#~ "дополнительную информацию.\n"
+
+#~ msgid ""
+#~ "We’ve emailed you instructions for setting your password, if an account "
+#~ "exists with the email you entered. You should receive them shortly."
+#~ msgstr ""
+#~ "Мы отправили Вам инструкции по изменению пароля на указанную почту. Вы "
+#~ "должны его получить в течение нескольких минут."
+
+#~ msgid ""
+#~ "If you don’t receive an email, please make sure you’ve entered the "
+#~ "address you registered with, and check your spam folder."
+#~ msgstr ""
+#~ "Если Вы не получили инструкции, удостоверьтесь, что Вы ввели правильный "
+#~ "адрес. Возможно, оно попало в спам."

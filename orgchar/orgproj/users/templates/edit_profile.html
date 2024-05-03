@@ -1,14 +1,14 @@
 {% extends "base.html" %}
-
-{% block title %}Edit{% endblock %}
+{% load i18n %}
+{% block title %}{% trans 'Edit profile' %}{% endblock %}
 
 {% block content %}
 
-    <h1>Edit Profile</h1>
+    <h1>{% trans 'Edit profile' %}</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Save Changes</button>
+        <button type="submit">{% trans 'Save changes' %}</button>
     </form>
 
 {% endblock %}

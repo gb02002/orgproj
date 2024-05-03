@@ -1,0 +1,142 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-03 17:22+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: orgproj/settings.py:210
+msgid "Russian"
+msgstr "Russisch"
+
+#: orgproj/settings.py:211
+msgid "Dutch"
+msgstr "Nederlands"
+
+#: orgproj/settings.py:212
+msgid "English"
+msgstr "Engels"
+
+#: templates/base.html:13
+msgid "MainTitle"
+msgstr "Aggregator voor liefdadigheid"
+
+#: templates/base.html:27
+#, fuzzy
+#| msgid "map"
+msgid "Map"
+msgstr "Kaart"
+
+#: templates/base.html:28
+#, fuzzy
+#| msgid "AllOrgs"
+msgid "All Orgs"
+msgstr "Alle organisaties"
+
+#: templates/base.html:29
+#, fuzzy
+#| msgid "forOrgs"
+msgid "For Orgs"
+msgstr "Voor organisaties"
+
+#: templates/base.html:31 templates/base.html:70
+#, fuzzy
+#| msgid "about"
+msgid "About"
+msgstr "Over Ons"
+
+#: templates/base.html:33
+#, fuzzy
+#| msgid "userFeedback"
+msgid "User's Feedback"
+msgstr "Terugkoppeling"
+
+#: templates/base.html:34
+msgid "Feedback"
+msgstr "Terugkoppeling voor organisaties"
+
+#: templates/base.html:46
+#, fuzzy
+#| msgid "profile"
+msgid "Profile"
+msgstr "Youw profiel"
+
+#: templates/base.html:47
+#, fuzzy
+#| msgid "logout"
+msgid "Logout"
+msgstr "Uitloggen"
+
+#: templates/base.html:49
+#, fuzzy
+#| msgid "login"
+msgid "Login"
+msgstr "Inloggen"
+
+#: templates/base.html:50
+#, fuzzy
+#| msgid "register"
+msgid "Register"
+msgstr "Registratie"
+
+#: templates/base.html:68
+msgid "Home"
+msgstr "Startpagina"
+
+#: templates/base.html:69
+#, fuzzy
+#| msgid "charityBase"
+msgid "Charity"
+msgstr "Liefdadigheid"
+
+#~ msgid "home"
+#~ msgstr "Startpagina"
+
+#~ msgid ""
+#~ "We’ve emailed you instructions for setting your password, if an account "
+#~ "exists with the email you entered. You should receive them shortly."
+#~ msgstr ""
+#~ "We hebben je instructies voor het instellen van je wachtwoord per e-mail "
+#~ "gestuurd, als er een account bestaat met het e-mailadres dat je hebt "
+#~ "ingevoerd. Je zou ze binnenkort moeten ontvangen."
+
+#~ msgid ""
+#~ "If you don’t receive an email, please make sure you’ve entered the "
+#~ "address you registered with, and check your spam folder."
+#~ msgstr ""
+#~ "Als je geen e-mail ontvangt, controleer dan of je het adreshebt ingevoerd "
+#~ "waarmee je je hebt geregistreerd, en controleer je spammap."
+
+#, python-format
+#~ msgid ""
+#~ "You're receiving this email because you requested a password reset for "
+#~ "your user account at %(site_name)s."
+#~ msgstr ""
+#~ "Je ontvangt deze e-mail omdat je een wachtwoordreset hebt aangevraagd "
+#~ "voor je gebruikersaccount op %(site_name)s."
+
+#~ msgid "Please go to the following page and choose a new password:"
+#~ msgstr "Ga naar de volgende pagina en kies een nieuw wachtwoord:"
+
+#~ msgid "Your username, in case you’ve forgotten:"
+#~ msgstr "Je gebruikersnaam, voor het geval dat je die vergeten bent:"
+
+#~ msgid "Thanks for using our site!"
+#~ msgstr "Bedankt voor het gebruik van onze site!"
+
+#, python-format
+#~ msgid "The %(site_name)s team"
+#~ msgstr "Het %(site_name)s team"

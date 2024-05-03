@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 {% block title %}
-    Add Organisation
+    {% trans 'Add organisation' %}
 {% endblock %}
 
 {% block content %}
-  <h2>Add Organisation</h2>
+  <h2>{% trans 'Add organisation' %}</h2>
   <form method="post">
     {% csrf_token %}
     <input type="hidden" name="root_csrf_token" value="{{ csrf_token }}">
     {{ form.as_p }}
-    <button type="submit">Submit</button>
+    <button type="submit">{% trans 'Submit' %}</button>
   </form>
 {% endblock %}

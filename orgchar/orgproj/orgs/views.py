@@ -18,6 +18,7 @@ from orgs.serializers import BoundsSerializer, LocInfoSerializer, FilterSerializ
 from .forms import OrgForm, LocationsForm, LocationMediaForm
 from django.views.decorators.cache import cache_page
 import logging
+from django.utils.translation import gettext as _
 
 # Create your views here.
 logger = logging.getLogger(__name__)
@@ -68,7 +69,7 @@ class OrganisationListView(ListView):
 
         # Добавление данных из get_queryset в контекст представления
         queryset = self.get_queryset()
-        p = Paginator(queryset, 5)
+        p = Paginator(queryset, 3)
 
         page_number = self.request.GET.get('page')
         page_obj = p.get_page(page_number)
@@ -197,7 +198,7 @@ class OrganisationDetailView(DetailView):
     def get_context_data(self, obj, *args, **kwargs):
         context = super().get_context_data(**kwargs)
         context['locations'] = obj.locations.all()
-        context['title'] = "Page of " + obj.title
+        context['title'] = _("Page of ") + obj.title
 
         return context
 
@@ -228,7 +229,7 @@ class ChoiceEditView(LoginRequiredMixin, TemplateView):
         orgs = self.request.user.orgs.all().prefetch_related('locations__media')
         logger.info(f'orgs context {orgs}')
         context['orgs'] = orgs
-        context['title'] = 'Records Administration Pane'
+        context['title'] = _('Records Administration Pane')
         return context
 
     # @method_decorator(cache_page(15 * 60, key_prefix='agent_view'))

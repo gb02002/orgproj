@@ -2,8 +2,6 @@ import logging
 from collections import OrderedDict
 from unittest.mock import patch, Mock
 
-from django.contrib.sessions.backends.cached_db import SessionStore
-from django.contrib.sessions.middleware import SessionMiddleware
 from django.test import RequestFactory, Client
 from django.contrib.auth.models import User
 from django.contrib.gis.geos import Point

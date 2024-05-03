@@ -16,6 +16,8 @@ class UserProfile(models.Model):
     surname = models.CharField(max_length=30, blank=True)
     phone = CharNullField(max_length=20, unique=True, blank=True, null=True)
     is_org_agent = models.CharField(max_length=20, choices=STATUS_CHOICES, null=True, blank=True, default='pending')
+    document_file = models.FileField(upload_to='media/users_documents', verbose_name='PDF document')
+    confirmed_user = models.BooleanField(default=True, verbose_name='confirmed user')
 
     def __str__(self):
         return f"Profile of {self.name, self.surname}"

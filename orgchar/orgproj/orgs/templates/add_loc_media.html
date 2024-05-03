@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 {% block title %}
-    Add location media
+    {% trans 'Add media for Location' %}
 {% endblock %}
 
 {% block content %}
-  <h2>Add location media</h2>
+  <h2>{% trans 'Add media for Location' %}</h2>
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
@@ -18,6 +18,6 @@
         {% endfor %}
       </ul>
     {% endif %}
-    <button type="submit">Submit</button>
+    <button type="submit">{% trans 'Submit' %}</button>
   </form>
 {% endblock %}

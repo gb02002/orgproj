@@ -1,15 +1,13 @@
+import os
 import smtplib
 from email.message import EmailMessage
 from datetime import datetime
 from celery import Celery, shared_task
 from django.contrib.auth.models import User
 
-SMTP_HOST = 'smtp.gmail.com'
-SMTP_PORT = 587
-SMTP_USER = ''
-SMTP_PASSWORD = ''
+from orgproj.settings import REDIS_HOST, REDIS_PORT, SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD
 
-celery = Celery('tasks', broker='redis://localhost:6379')
+celery = Celery('tasks', broker=f'redis://{REDIS_HOST}:{REDIS_PORT}')
 
 
 def news_email_template(user: User):

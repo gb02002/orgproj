@@ -1,17 +1,16 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block head %}
 <title>{{ title }}</title>
-<!-- Ваши скрипты CSS здесь -->
-
 
 {% endblock %}
 
 {% block content %}
 
-<h2 class="page-title">Your records</h2>
-<h4 class="page-subtitle">Here you can add/edit/delete your organisations and locations</h4>
+<h2 class="page-title">{% trans "Your records" %}</h2>
+<h4 class="page-subtitle">{% trans "Here you can add/edit/delete your organisations and locations" %}</h4>
 
 {% for org in orgs %}
 <div class="org-info">

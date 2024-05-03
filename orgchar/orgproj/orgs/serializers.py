@@ -3,8 +3,8 @@ from orgs.models import Locations, Organisation, FilterforLocation
 import logging
 
 logger = logging.getLogger(__name__)
-# logger.setLevel(logging.DEBUG)
-logger.setLevel(logging.WARNING)
+logger.setLevel(logging.DEBUG)
+# logger.setLevel(logging.WARNING)
 
 
 class BoundsSerializer(serializers.Serializer):
@@ -16,25 +16,33 @@ class BoundsSerializer(serializers.Serializer):
 
         data = data['bounds_dict']
 
-        # Create a list of boundaries
-        min_latitude = bounds_dict["south"]
-        max_latitude = bounds_dict["north"]
-        min_longitude = bounds_dict["west"]
-        max_longitude = bounds_dict["east"]
+        south = data.get('south', None)
+        north = data.get('north', None)
+        west = data.get('west', None)
+        east = data.get('east', None)
 
-        for coord, value in data.items():
-            if value is None or not isinstance(value, (int, float)):
-                raise serializers.ValidationError(
-                    f"Invalid value for {coord}. Must be a number. Happens in {coord} with {value}")
+        if not all(isinstance(val, (int, float)) for val in [south, north, west, east]):
+            raise serializers.ValidationError("Coordinates must be numbers.")
 
-        if not (min_latitude <= data["south"] <= max_latitude) or not (min_latitude <= data["north"] <= max_latitude):
-            raise serializers.ValidationError("Latitude is out of bounds")
+        if south is not None and north is not None:
+            if south > north:
+                south, north = north, south
+            south = max(south, 50.0819879)  # Минимальная южная граница
+            north = min(north, 54.0270141)  # Максимальная северная граница
 
-        if not (min_longitude <= data["west"] <= max_longitude) or not (min_longitude <= data["east"] <= max_longitude):
-            raise serializers.ValidationError("Longitude is out of bounds")
+        if west is not None and east is not None:
+            if west > east:
+                west, east = east, west
+            west = max(west, 2.90730629)  # Минимальная западная граница
+            east = min(east, 7.6831597)  # Максимальная восточная граница
 
         logger.debug(f"Serialized coords: {data}")
-        return data
+        return {
+            'south': south,
+            'north': north,
+            'west': west,
+            'east': east
+        }
 
 
 class OrganisationSerializer(serializers.ModelSerializer):

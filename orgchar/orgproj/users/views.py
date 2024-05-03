@@ -1,18 +1,13 @@
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.tokens import default_token_generator
-from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, get_user_model
 from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordResetView
 from django.urls import reverse_lazy
-from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode
 from django.views.generic import DetailView, UpdateView
 import logging
-from users.form import UserProfileForm, ProfileUserForm, UserPasswordChangeForm
+from users.form import UserProfileForm, ProfileUserForm, UserPasswordChangeForm, CustomUserCreationForm
 from users.models import UserProfile
 
 import smtplib
@@ -24,24 +19,20 @@ logger.setLevel(logging.DEBUG)
 
 class CustomLogin(LoginView):
     template_name = "login.html"
-    # success_url = redirect('map')
-    # success_url = reverse_lazy('map')
-    success_url = reverse_lazy('orgs:edit-choice')
+    success_url = reverse_lazy('map')
     redirect_authenticated_user = False  # Change to True after debug
 
 
 def logout_view(request):
     logout(request)
-    # Перенаправление на главную страницу после выхода из системы
     return redirect('map')
 
 
 class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = UserProfile
     form_class = UserProfileForm
-    template_name = "edit_profile.html"  # Убедитесь, что файл шаблона существует с этим именем
-    success_url = reverse_lazy(
-        'profile')  # Замените 'profile_detail_view' на имя вашего URL-маршрута для просмотра профиля
+    template_name = "edit_profile.html"
+    success_url = reverse_lazy('profile1')
 
     def get_object(self, queryset=None):
         # Убедитесь, что пользователь может редактировать только свой профиль
@@ -80,48 +71,31 @@ class UserProfileView(DetailView):
         return context
 
 
-# def registration_view(request):
-#     if request.method == 'POST':
-#         form = CustomUserForm(request.POST)
-#         if form.is_valid():
-#             user = form.save()
-#
-#             profile = UserProfile(profile_id=user.pk)
-#             profile.save()
-#
-#             login(request, user)
-#             messages.success(request, "Registration is done")
-#
-#             return redirect('about')
-#
-#         else:
-#             return render(request, 'registration.html', context={"form": form})
-#     else:
-#         form = CustomUserForm()
-#         context = {
-#             'form': form
-#         }
-#         return render(request, 'registration.html', context)
-
-
 def registration_view(request):
+    """Regular reg_view. Email is username"""
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST, request.FILES)
         if form.is_valid():
-            user = form.save()
+            user = form.save(commit=False)
+            user.username = user.email
+            user.save()
 
-            profile = UserProfile(profile_id=user.pk)
-            profile.save()
+            profile, created = UserProfile.objects.get_or_create(profile_id=user.pk)
+
+            document_file = form.cleaned_data.get('file')
+            if document_file:
+                profile.document_file = document_file
+                profile.save()
 
             login(request, user)
+
             messages.success(request, "Registration is done")
 
             return redirect('map')
-
         else:
             return render(request, 'registration.html', context={"form": form})
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm(request.POST, request.FILES)
         context = {
             'form': form
         }
@@ -135,7 +109,7 @@ class ProfileUser(LoginRequiredMixin, UpdateView):
     extra_context = {'title': "Профиль пользователя"}
 
     def get_success_url(self):
-        return reverse_lazy('users:profile', args=[self.request.user.pk])
+        return reverse_lazy('profile')
 
     def get_object(self, queryset=None):
         return self.request.user

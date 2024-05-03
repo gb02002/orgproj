@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
- 
+ {% load i18n %}
 {% block content %}
-<h1>Восстановление пароля</h1>
+<h1>{% trans 'Password reset'%}</h1>
  
 <form method="post">
     {% csrf_token %}
@@ -10,7 +10,7 @@
 <div class="form-error">{{ f.errors }}</div>
 {% endfor %}
  
-    <p ><button type="submit">Сбросить по E-mail</button></p>
+    <p ><button type="submit">{% trans 'Send by email:'%}</button></p>
 </form>
  
 {% endblock %}

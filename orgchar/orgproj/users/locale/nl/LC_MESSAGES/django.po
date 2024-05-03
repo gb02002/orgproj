@@ -1,0 +1,226 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-03 17:22+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: users/templates/about.html:3
+msgid "About"
+msgstr "Over Ons"
+
+#: users/templates/about.html:7
+msgid "About Us"
+msgstr "Over Ons"
+
+#: users/templates/about.html:10
+msgid "The 'About' section also includes additional information."
+msgstr "Het gedeelte 'Over ons' bevat ook aanvullende informatie."
+
+#: users/templates/about.html:13
+msgid "Do you have any questions?"
+msgstr "Heeft u vragen?"
+
+#: users/templates/about.html:15
+#, fuzzy
+#| msgid ""
+#| "        If you have any questions, suggestions, or if you would like to "
+#| "learn more about the project,\n"
+#| "        please don't hesitate to reach out to us. We are always open for "
+#| "communication and ready to assist!\n"
+#| "    "
+msgid ""
+"If you have any questions, suggestions, or if you would like to learn more "
+"about the project,"
+msgstr ""
+"        Als je vragen of suggesties hebt, of als je meer wilt weten over het "
+"project...aarzel dan niet om contact met ons op te nemen. We staan altijd "
+"open voor communicatie en staan klaar om te helpen!"
+
+#: users/templates/about.html:16
+msgid ""
+"please don't hesitate to reach out to us. We are always open for "
+"communication and ready to assist!"
+msgstr ""
+"aarzel dan niet om contact met ons op te nemen. We staan altijd open voor "
+"communicatie en staan klaar om te helpen!"
+
+#: users/templates/about.html:19
+msgid "Contact us:"
+msgstr "Neem contact met ons op:"
+
+#: users/templates/about.html:22
+msgid "Name:"
+msgstr "Naam:"
+
+#: users/templates/about.html:23
+msgid "Your name"
+msgstr "Uw naam"
+
+#: users/templates/about.html:26
+msgid "Email:"
+msgstr "E-mail:"
+
+#: users/templates/about.html:27
+msgid "Your email"
+msgstr "Uw e-mail"
+
+#: users/templates/about.html:30
+msgid "Message:"
+msgstr "Bericht:"
+
+#: users/templates/about.html:31
+msgid "Your message"
+msgstr "Uw bericht"
+
+#: users/templates/about.html:33
+msgid "Send"
+msgstr "Verzenden"
+
+#: users/templates/edit_password.html:3 users/templates/edit_password.html:6
+msgid "Edit password"
+msgstr "Wachtwoord bewerken"
+
+#: users/templates/edit_password.html:10
+#: users/templates/password_change_form.html:14
+msgid "Change password"
+msgstr "Wachtwoord wijzigen"
+
+#: users/templates/edit_profile.html:3 users/templates/edit_profile.html:7
+msgid "Edit profile"
+msgstr "Profiel bewerken"
+
+#: users/templates/edit_profile.html:11
+msgid "Save changes"
+msgstr "Wijzigingen opslaan"
+
+#: users/templates/login.html:5 users/templates/login.html:9
+#: users/templates/pass_reset_complete.html:8
+msgid "Log in"
+msgstr "Inloggen"
+
+#: users/templates/login.html:10
+msgid "Forgot password?"
+msgstr "Wachtwoord vergeten?"
+
+#: users/templates/pass_reset_complete.html:4
+msgid "Password is changed!"
+msgstr "Wachtwoord is gewijzigd!"
+
+#: users/templates/pass_reset_complete.html:6
+msgid "Congratulations!"
+msgstr "Gefeliciteerd!"
+
+#: users/templates/pass_reset_complete.html:7
+msgid "You have successfully changed your account password. Use it to "
+msgstr "Je hebt met succes je accountwachtwoord gewijzigd. Gebruik het om "
+
+#: users/templates/pass_reset_confirm.html:4
+msgid "New password:"
+msgstr "Nieuw wachtwoord:"
+
+#: users/templates/pass_reset_confirm.html:14
+msgid "Save"
+msgstr "Save"
+
+#: users/templates/pass_reset_done.html:5
+msgid "Password reset:"
+msgstr "Wachtwoord opnieuw instellen:"
+
+#: users/templates/pass_reset_form.html:4
+msgid "Password reset"
+msgstr "Wachtwoord opnieuw instellen"
+
+#: users/templates/pass_reset_form.html:13
+msgid "Send by email:"
+msgstr "Stuur per e-mail:"
+
+#: users/templates/password_change_done.html:4
+msgid "Password is successfully changed!"
+msgstr "Wachtwoord is succesvol gewijzigd!"
+
+#: users/templates/password_change_done.html:5
+msgid "You have changed your password."
+msgstr "U hebt uw wachtwoord gewijzigd."
+
+#: users/templates/password_change_done.html:5
+msgid "Back to profile."
+msgstr "Terug naar profiel."
+
+#: users/templates/password_change_form.html:4
+msgid "Change your password:"
+msgstr "Wijzig je wachtwoord:"
+
+#: users/templates/password_reset_email.html:2
+#, python-format
+msgid ""
+"You're receiving this email because you requested a password reset for your "
+"user account at %(site_name)s."
+msgstr ""
+"Je ontvangt deze e-mail omdat je een wachtwoordreset hebt aangevraagd voor "
+"je gebruikersaccount op %(site_name)s."
+
+#: users/templates/password_reset_email.html:4
+msgid "Please go to the following page and choose a new password:"
+msgstr "Ga naar de volgende pagina en kies een nieuw wachtwoord:"
+
+#: users/templates/password_reset_email.html:8
+msgid "Your username, in case you’ve forgotten:"
+msgstr "Je gebruikersnaam, voor het geval dat je die vergeten bent:"
+
+#: users/templates/password_reset_email.html:10
+msgid "Thanks for using our site!"
+msgstr "Bedankt voor het gebruik van onze site!"
+
+#: users/templates/password_reset_email.html:12
+#, python-format
+msgid "The %(site_name)s team"
+msgstr "Het %(site_name)s team"
+
+#: users/templates/registration.html:5
+msgid "Register here:"
+msgstr "Registreer hier:"
+
+#: users/templates/registration.html:17
+msgid "Submit"
+msgstr "Stuur in"
+
+#~ msgid ""
+#~ "    This project is a non-commercial educational project created to "
+#~ "demonstrate various functions and\n"
+#~ "        capabilities of web development. The 'About' section also "
+#~ "includes additional information.\n"
+#~ "    "
+#~ msgstr ""
+#~ "Dit project is een niet-commercieel educatief project gemaakt om "
+#~ "verschillende functies en mogelijkheden van webontwikkeling te "
+#~ "demonstreren.mogelijkheden van webontwikkeling te demonstreren. De 'Over' "
+#~ "sectie bevat ook  aanvullende informatie."
+
+#~ msgid ""
+#~ "We’ve emailed you instructions for setting your password, if an account "
+#~ "exists with the email you entered. You should receive them shortly."
+#~ msgstr ""
+#~ "We hebben je instructies voor het instellen van je wachtwoord per e-mail "
+#~ "gestuurd, als er een account bestaat met het e-mailadres dat je hebt "
+#~ "ingevoerd. Je zou ze binnenkort moeten ontvangen."
+
+#~ msgid ""
+#~ "If you don’t receive an email, please make sure you’ve entered the "
+#~ "address you registered with, and check your spam folder."
+#~ msgstr ""
+#~ "Als je geen e-mail ontvangt, controleer dan of je het adreshebt ingevoerd "
+#~ "waarmee je je hebt geregistreerd, en controleer je spammap."

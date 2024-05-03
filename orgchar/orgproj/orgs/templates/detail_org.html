@@ -1,30 +1,29 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 {% block head %}
-<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbt_iMBFXcdTSYsEFBnIKvnzgDQV1D92Y"></script>-->
 {{form.media}}
 {% endblock %}
 
 {% block content %}
-    <h2>{{ title }}</h2>
+    <h2>{% trans title %}</h2>
 
-    <p>Description: {{ org.desc }}</p>
-    <p>Email: {{ org.mail }}</p>
-    <p>Phone: {{ org.phone }}</p>
-    <p>Website: <a href="{{ org.web }}">{{ org.web }}</a></p>
+    <p>{% trans "Description:" %} {{ org.desc }}</p>
+    <p>{% trans "Email:" %} {{ org.mail }}</p>
+    <p>{% trans "Phone:" %} {{ org.phone }}</p>
+    <p>{% trans "Website:" %} <a href="{{ org.web }}">{{ org.web }}</a></p>
 
-    <h3>Locations:</h3>
+    <h3>{% trans "Locations:" %}</h3>
     <ul>
         {% for location in locations %}
             <li>
-                <p>Name: {{ location.location_name }}</p>
-                <p>Address: {{ location.address }}</p>
-                <p>Open Hours: {{ location.open_hours }}</p>
+                <p>{% trans "Name" %}: {{ location.location_name }}</p>
+                <p>{% trans "Address" %}: {{ location.address }}</p>
+                <p>{% trans "Open hours" %}: {{ location.open_hours }}</p>
                 <!-- Дополнительные поля местоположения -->
                 <div id="map" class="map-container"></div>
 
                 <!-- Отображаем медиа для каждого местоположения -->
-                <h4>Media:</h4>
+                <h4>{% trans "Media" %}:</h4>
                 <ul>
                     {% for media in location.media.all %}
                     <h5>media.media_id</h5>
