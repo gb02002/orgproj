@@ -12,6 +12,7 @@ urlpatterns = ([
     path('profile1/', views.UserProfileView.as_view(), name='profile1'),
     path('profile/', views.ProfileUser.as_view(), name='profile'),
     path('profile/edit/', views.UserProfileUpdateView.as_view(), name='profile_edit'),
+    path('profile/upload-document', views.UploadFileView.as_view(), name='upload-documents'),
     path('logout/', views.logout_view, name='logout'),
     path('registration/', views.registration_view, name="registration_view"),
 

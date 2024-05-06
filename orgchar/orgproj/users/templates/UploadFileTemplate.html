@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans 'Upload documents' %}{% endblock %}
+{% block head %}
+{{form.media}}
+{% endblock %}
+
+{% block content %}
+
+<div class = "uploadfile">
+<h2 style="text-align: center;">{% trans 'Upload documents'%}:</h2>
+<h4 style="text-align: center;">{% trans "We need to confirm your documents to be sure that you are an actual holder of your organisation's rights."%}</h4>
+
+    <form enctype="multipart/form-data" method="post">
+      {% csrf_token %}
+      <div class="form-field">
+        <label for="id_file">{{ form.file.label }}</label>
+        {% if form.file.errors %}
+          {{ form.file }}
+          <div class="invalid-feedback">
+            {% for error in form.file.errors %}
+              {{ error }}
+            {% endfor %}
+          </div>
+        {% else %}
+          {{ form.file }}
+        {% endif %}
+      </div>
+      <button type="submit">{% trans 'Submit' %}</button>
+    </form>
+
+</div>
+
+{% endblock %}

@@ -2,33 +2,42 @@
 {% load i18n %}
 {% load static %}
 
-{% block head %}
-<title>{{ title }}</title>
+{% block title %}{{ title }}{% endblock %}
 
+{% block head %}
+<meta name="csrf-token" content="{% csrf_token %}">
 {% endblock %}
 
 {% block content %}
+<title>{{ title }}</title>
 
 <h2 class="page-title">{% trans "Your records" %}</h2>
 <h4 class="page-subtitle">{% trans "Here you can add/edit/delete your organisations and locations" %}</h4>
+
+
+<a href="{% url 'add-org-1' %}" class="add-org-link">
+    {% trans 'Add your organisation!' %}</a>
 
 {% for org in orgs %}
 <div class="org-info">
     <div class="org-header text-increase" onclick="handleOrgHeaderClick(event, {{ org.pk }})">
         {{ org }}
         <div class="button-container">
-            <a href="#" class="button-link" onclick="handleLinkClick(event)">
-                <img src="{% static 'images/plus.png' %}" alt="Add location" class="small-image">
-            </a>
+            <div class="button-group">
+                <a href="{% url 'add-loc' pk=org.pk %}" class="button-link add-location">
+                    <img src="{% static 'images/plus.png' %}" alt="Add location" class="small-image">
+                </a>
 
-            <a href="#" class="button-link" onclick="handleLinkClick(event)">
-                <img src="{% static 'images/pencil.png' %}" alt="Editing" class="small-image">
-            </a>
+                <a href="{% url 'edit-org' pk=org.pk %}" class="button-link edit">
+                    <img src="{% static 'images/pencil.png' %}" alt="Editing" class="small-image">
+                </a>
 
-            <a href="#" class="button-link" onclick="handleLinkClick(event)">
-                <img src="{% static 'images/delete.png' %}" alt="Delete" class="small-image">
-            </a>
+                <a href="{% url 'del-org' pk=org.pk %}" class="button-link delete">
+                    <img src="{% static 'images/delete.png' %}" alt="Delete" class="small-image">
+                </a>
+            </div>
         </div>
+
     </div>
 
     <div class="org-locations" id="org-{{ org.pk }}-locations" style="display: none;">
@@ -37,18 +46,21 @@
             {{ location.location_name }}
 
             <div class="button-container">
-                <a href="#" class="button-link">
-                    <img src="{% static 'images/plus.png' %}" alt="Add location" class="small-image">
-                </a>
+                <div class="button-group">
+                    <a href="{% url 'add-loc-media' pk=location.location %}" class="button-link add-location">
+                        <img src="{% static 'images/plus.png' %}" alt="Add location" class="small-image">
+                    </a>
 
-                <a href="#" class="button-link">
-                    <img src="{% static 'images/pencil.png' %}" alt="Editing" class="small-image">
-                </a>
+                    <a href="{% url 'edit-loc' pk=location.location %}" class="button-link edit">
+                        <img src="{% static 'images/pencil.png' %}" alt="Editing" class="small-image">
+                    </a>
 
-                <a href="#" class="button-link">
-                    <img src="{% static 'images/delete.png' %}" alt="Delete" class="small-image">
-                </a>
+                    <a href="{% url 'del-loc' pk=location.location %}" class="button-link delete">
+                        <img src="{% static 'images/delete.png' %}" alt="Delete" class="small-image">
+                    </a>
+                </div>
             </div>
+
 
             <!-- Здесь можете добавить дополнительную информацию, которую нужно скрывать/показывать -->
 
@@ -62,18 +74,18 @@
                     {{ media.media_id }}
 
                     <div class="button-container">
-                        <a href="#" class="button-link">
-                            <img src="{% static 'images/plus.png' %}" alt="Add location" class="small-image">
-                        </a>
+                        <div class="button-group">
 
-                        <a href="#" class="button-link">
-                            <img src="{% static 'images/pencil.png' %}" alt="Editing" class="small-image">
-                        </a>
+                            <a href="{% url 'edit-loc-media' pk=media.media_id %}" class="button-link edit">
+                                <img src="{% static 'images/pencil.png' %}" alt="Editing" class="small-image">
+                            </a>
 
-                        <a href="#" class="button-link">
-                            <img src="{% static 'images/delete.png' %}" alt="Delete" class="small-image">
-                        </a>
+                            <a href="{% url 'del-loc-media' pk=media.media_id %}" class="button-link delete">
+                                <img src="{% static 'images/delete.png' %}" alt="Delete" class="small-image">
+                            </a>
+                        </div>
                     </div>
+
 
                     <div class="media-details" id="media-details-{{ media.media_id }}" style="display: none;">
                         <ul>
@@ -153,6 +165,3 @@ function toggleLocation(locationId) {
 </script>
 
 {% endblock %}
-
-/// Меняется display none на display block в location-details
-надо пофиксить нумерацию. лок2 -> лок1

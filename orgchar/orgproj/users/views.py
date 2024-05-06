@@ -5,9 +5,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, get_user_model
 from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordResetView
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, UpdateView
+from django.views.generic import DetailView, UpdateView, FormView
 import logging
-from users.form import UserProfileForm, ProfileUserForm, UserPasswordChangeForm, CustomUserCreationForm
+from users.form import UserProfileForm, ProfileUserForm, UserPasswordChangeForm, CustomUserCreationForm, UploadFileForm
 from users.models import UserProfile
 
 import smtplib
@@ -45,30 +45,30 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
         return kwargs
 
 
-class UserProfileView(DetailView):
-    model = User
-    template_name = "profile.html"
-
-    # context_object_name = "users_data"
-
-    def get_object(self, queryset=None):
-        return self.request.user
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        user = self.object
-
-        users_data = {
-            'email': user.username,
-            'name': user.profile.name,
-            'surname': user.profile.surname,
-            'phone': user.profile.phone,
-        }
-
-        context['users_data'] = users_data
-
-        return context
+# class UserProfileView(DetailView):
+#     model = User
+#     template_name = "profile1.html"
+#
+#     # context_object_name = "users_data"
+#
+#     def get_object(self, queryset=None):
+#         return self.request.user
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#
+#         user = self.object
+#
+#         users_data = {
+#             'email': user.username,
+#             'name': user.profile.name,
+#             'surname': user.profile.surname,
+#             'phone': user.profile.phone,
+#         }
+#
+#         context['users_data'] = users_data
+#
+#         return context
 
 
 def registration_view(request):
@@ -80,12 +80,10 @@ def registration_view(request):
             user.username = user.email
             user.save()
 
-            profile, created = UserProfile.objects.get_or_create(profile_id=user.pk)
+            profile = UserProfile.objects.create(profile=user)
 
-            document_file = form.cleaned_data.get('file')
-            if document_file:
-                profile.document_file = document_file
-                profile.save()
+            user.profile = profile
+            profile.save()
 
             login(request, user)
 
@@ -109,7 +107,7 @@ class ProfileUser(LoginRequiredMixin, UpdateView):
     extra_context = {'title': "Профиль пользователя"}
 
     def get_success_url(self):
-        return reverse_lazy('profile')
+        return reverse_lazy('profile1')
 
     def get_object(self, queryset=None):
         return self.request.user
@@ -155,3 +153,59 @@ class CustomResetView(PasswordResetView):
 
         # Вернем ответ (response), как это делает родительский класс
         return response
+
+
+class UploadFileView(LoginRequiredMixin, FormView):
+    form_class = UploadFileForm
+    model = UserProfile
+    template_name = 'UploadFileTemplate.html'
+    success_url = reverse_lazy('profile1')
+
+    def get_object(self, queryset=None):
+        return self.request.user.profile
+
+    def form_invalid(self, form):
+        error_message = f"Document upload failed due to the following errors: {form.errors}"
+        logger.error(error_message)
+
+        return self.render_to_response(self.get_context_data(form=form))
+
+    def form_valid(self, form):
+        # Получаем профиль пользователя
+        profile = self.request.user.profile
+        # Сохраняем файл в профиле пользователя
+        profile.document_file = form.cleaned_data['file']
+        profile.save()
+        return super().form_valid(form)
+
+
+class UserProfileView(LoginRequiredMixin, DetailView):
+    model = User
+    template_name = "profile3.html"
+
+    # context_object_name = "users_data"
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def get_queryset(self):
+        return self.request.user.orgs.all().prefetch_related('locations__media')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.object
+        status_icon = user.profile.get_status_display_with_icon()
+
+        users_data = {
+            'email': user.username,
+            'name': user.profile.name,
+            'surname': user.profile.surname,
+            'phone': user.profile.phone,
+            'status_icon': status_icon,
+            'status': user.profile.is_org_agent,
+            'organisations': self.get_queryset()
+        }
+
+        context['users_data'] = users_data
+
+        return context

@@ -1,7 +1,7 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import render, redirect
 from django.core.serializers import serialize
-from django.http import JsonResponse, Http404
+from django.http import JsonResponse, Http404, HttpResponseRedirect
 from django.urls import reverse_lazy, reverse
 from django.utils.crypto import get_random_string
 from django.utils.decorators import method_decorator
@@ -216,9 +216,9 @@ class OrganisationDetailView(DetailView):
         return obj
 
 
-class ChoiceEditView(LoginRequiredMixin, TemplateView):
+class ChoiceEditView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
     """Шаблонный класс который выдает информацию о всех сущностях и предоставляет редакцию, добавление и удаление"""
-    template_name = 'editing.html'
+    template_name = 'editing_choice.html'
     context_object_name = 'orgs'
 
     # model = Organisation
@@ -244,6 +244,15 @@ class ChoiceEditView(LoginRequiredMixin, TemplateView):
             edit_token = get_random_string(length=32)
             response.set_cookie('edit_token', edit_token, max_age=600)
         return response
+
+    def test_func(self):
+        """Test for mixin"""
+        profile = self.request.user.profile
+        return profile.is_org_agent == 'confirmed'
+
+    def handle_no_permission(self):
+        """Fail for mixin"""
+        return redirect('profile1')
 
 
 # class AddOrgView(LoginRequiredMixin, FormView):

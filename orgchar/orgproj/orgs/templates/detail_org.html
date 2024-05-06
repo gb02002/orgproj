@@ -1,41 +1,54 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load static %}
+
+{% block title %}{% trans "Organisation's details" %}{% endblock %}
+
 {% block head %}
 {{form.media}}
-{% endblock %}
-
+<link rel="stylesheet" type="text/css" href="{% static 'css/detail.css' %}">
+{% endblock head %}
+<!--Добавить оформление, центрирование-->
 {% block content %}
-    <h2>{% trans title %}</h2>
+    <div class="organization-details">
+        <h2>{{ title }}</h2>
 
-    <p>{% trans "Description:" %} {{ org.desc }}</p>
-    <p>{% trans "Email:" %} {{ org.mail }}</p>
-    <p>{% trans "Phone:" %} {{ org.phone }}</p>
-    <p>{% trans "Website:" %} <a href="{{ org.web }}">{{ org.web }}</a></p>
+        <div class="org-description">
+            <p><strong>{% trans "Description:" %}</strong> {{ org.desc }}</p>
+            <p><strong>{% trans "Email:" %}</strong> {{ org.mail }}</p>
+            <p><strong>{% trans "Phone:" %}</strong> {{ org.phone }}</p>
+            <p><strong>{% trans "Website:" %}</strong> <a href="{{ org.web }}">{{ org.web }}</a></p>
+        </div>
 
-    <h3>{% trans "Locations:" %}</h3>
-    <ul>
-        {% for location in locations %}
-            <li>
-                <p>{% trans "Name" %}: {{ location.location_name }}</p>
-                <p>{% trans "Address" %}: {{ location.address }}</p>
-                <p>{% trans "Open hours" %}: {{ location.open_hours }}</p>
-                <!-- Дополнительные поля местоположения -->
-                <div id="map" class="map-container"></div>
+        <h3>{% trans "Locations:" %}</h3>
+        <ul class="locations-list">
+            {% for location in locations %}
+                <li class="location-item">
+                    <div class="location-details">
+                        <p><strong>{% trans "Name" %}:</strong> {{ location.location_name }}</p>
+                        <p><strong>{% trans "Address" %}:</strong> {{ location.address }}</p>
+                        <p><strong>{% trans "Open hours" %}:</strong> {{ location.open_hours }}</p>
+                    </div>
 
-                <!-- Отображаем медиа для каждого местоположения -->
-                <h4>{% trans "Media" %}:</h4>
-                <ul>
-                    {% for media in location.media.all %}
-                    <h5>media.media_id</h5>
-                            <li>
-                                <img src="{{ media.image.url }}" alt="{{ media.description }}">
-                                <p>{{ media.description }}</p>
-                            </li>
-                    {% endfor %}
-                </ul>
-            </li>
-        {% endfor %}
-    </ul>
+                    <!-- Дополнительные поля местоположения -->
+                    <div class="map-container" id="map-{{ location.id }}"></div>
+
+                    <!-- Отображаем медиа для каждого местоположения -->
+                    <div class="media-container">
+                        <h4><strong>{% trans "Media" %}:</strong></h4>
+                        <ul class="media-list">
+                            {% for media in location.media.all %}
+                                <li class="media-item">
+                                    <img src="{{ media.image.url }}" alt="{{ media.description }}">
+                                    <p>{{ media.description }}</p>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}
 
 

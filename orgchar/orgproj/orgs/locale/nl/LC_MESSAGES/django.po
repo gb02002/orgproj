@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-03 17:56+0200\n"
+"POT-Creation-Date: 2024-05-06 15:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,39 +81,39 @@ msgstr "Bevestig verwijderen organisatie"
 msgid "Are you sure you want to delete this Organisation?"
 msgstr "Weet u zeker dat u deze organisatie wilt verwijderen?"
 
-#: templates/detail_org.html:10
+#: templates/detail_org.html:15
 msgid "Description:"
 msgstr "Beschrijving:"
 
-#: templates/detail_org.html:11
+#: templates/detail_org.html:16
 msgid "Email:"
 msgstr "E-mail:"
 
-#: templates/detail_org.html:12
+#: templates/detail_org.html:17
 msgid "Phone:"
 msgstr "Telefoon:"
 
-#: templates/detail_org.html:13
+#: templates/detail_org.html:18
 msgid "Website:"
 msgstr "Website:"
 
-#: templates/detail_org.html:15
+#: templates/detail_org.html:21
 msgid "Locations:"
 msgstr "Locaties:"
 
-#: templates/detail_org.html:19
+#: templates/detail_org.html:26
 msgid "Name"
 msgstr "Naam"
 
-#: templates/detail_org.html:20
+#: templates/detail_org.html:27
 msgid "Address"
 msgstr "Adres"
 
-#: templates/detail_org.html:21
+#: templates/detail_org.html:28
 msgid "Open hours"
 msgstr "Openingstijden"
 
-#: templates/detail_org.html:26
+#: templates/detail_org.html:36
 msgid "Media"
 msgstr "Media"
 
@@ -129,19 +129,21 @@ msgstr "Media van locatie bewerken"
 msgid "Edit Organisation"
 msgstr "Organisatie bewerken"
 
-#: templates/editing_choice.html:12
+#: templates/editing1.html:12 templates/editing_choice.html:12
 msgid "Your records"
 msgstr "Uw gegevens"
 
-#: templates/editing_choice.html:13
+#: templates/editing1.html:13 templates/editing_choice.html:13
 msgid "Here you can add/edit/delete your organisations and locations"
 msgstr "Hier kunt u uw organisaties en locaties toevoegen/bewerken/verwijderen"
 
-#: templates/map.html:3
-msgid "Map"
-msgstr "Kaart"
+#: templates/editing_choice.html:17
+#, fuzzy
+#| msgid "Add organisation"
+msgid "Add your organisation!"
+msgstr "Organisatie toevoegen"
 
-#: templates/map.html:17
+#: templates/map.html:3
 msgid "Find some locations near you!"
 msgstr "Zoek een aantal locaties bij jou in de buurt!"
 
@@ -152,3 +154,6 @@ msgstr "Pagina van "
 #: views.py:232
 msgid "Records Administration Pane"
 msgstr "Administratiepaneel"
+
+#~ msgid "Map"
+#~ msgstr "Kaart"

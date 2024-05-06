@@ -36,7 +36,7 @@ def news_email_template(user: User):
     return email
 
 
-def new_agent_email(user: User):
+def new_agent_email(first_name, last_name, us_email, date_joined):
     email = EmailMessage()
     email['Subject'] = 'New Agent'
     email['From'] = SMTP_USER
@@ -46,13 +46,13 @@ def new_agent_email(user: User):
 
     email.set_content(
         '<div>'
-        f'<h2>Hello, there are new agent registered: {user.username} </h2>'
+        f'<h2>Hello, there are new agent registered: {us_email} </h2>'
         '<ul>'
-        f'<li>Name:{user.first_name} {user.last_name}</li>'
-        f'<li>Email:{user.email}</li>'
-        f'<li>Time joined: {user.date_joined}</li>'
+        f'<li>Name:{first_name} {last_name}</li>'
+        f'<li>Time joined: {date_joined}</li>'
         f'<li>Time: {current_time}</li>'
         '</ul>'
+        '<h3>Go check his documents! </h3>'
         '<p>One more day</p>'
         '<p>Sincerely,</p>'
         '<p>You</p>'
@@ -120,8 +120,8 @@ def send_news(user: User):
 
 
 @celery.task
-def send_mail_new_agent(user: User):
-    email = new_agent_email(user)
+def send_mail_new_agent(first_name, last_name, us_email, date_joined):
+    email = new_agent_email(first_name, last_name, us_email, date_joined)
     with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT) as server:
         server.login(SMTP_USER, SMTP_PASSWORD)
         server.send_message(email)

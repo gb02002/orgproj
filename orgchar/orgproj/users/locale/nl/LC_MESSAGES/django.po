@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-03 17:22+0200\n"
+"POT-Creation-Date: 2024-05-06 15:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,23 +18,41 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: users/templates/about.html:3
+#: templates/UploadFileTemplate.html:3 templates/UploadFileTemplate.html:11
+#: templates/profile3.html:39 templates/profile3.html:73
+msgid "Upload documents"
+msgstr "Documenten uploaden"
+
+#: templates/UploadFileTemplate.html:12
+msgid ""
+"We need to confirm your documents to be sure that you are an actual holder "
+"of your organisation's rights."
+msgstr ""
+"We moeten uw documenten bevestigen om er zeker van te zijn dat u daadwerkelijk houder "
+"bent van de rechten van uw organisatie."
+
+
+#: templates/UploadFileTemplate.html:29 templates/registration.html:24
+msgid "Submit"
+msgstr "Stuur in"
+
+#: templates/about.html:3
 msgid "About"
 msgstr "Over Ons"
 
-#: users/templates/about.html:7
+#: templates/about.html:7
 msgid "About Us"
 msgstr "Over Ons"
 
-#: users/templates/about.html:10
+#: templates/about.html:10
 msgid "The 'About' section also includes additional information."
 msgstr "Het gedeelte 'Over ons' bevat ook aanvullende informatie."
 
-#: users/templates/about.html:13
+#: templates/about.html:13
 msgid "Do you have any questions?"
 msgstr "Heeft u vragen?"
 
-#: users/templates/about.html:15
+#: templates/about.html:15
 #, fuzzy
 #| msgid ""
 #| "        If you have any questions, suggestions, or if you would like to "
@@ -50,7 +68,7 @@ msgstr ""
 "project...aarzel dan niet om contact met ons op te nemen. We staan altijd "
 "open voor communicatie en staan klaar om te helpen!"
 
-#: users/templates/about.html:16
+#: templates/about.html:16
 msgid ""
 "please don't hesitate to reach out to us. We are always open for "
 "communication and ready to assist!"
@@ -58,113 +76,113 @@ msgstr ""
 "aarzel dan niet om contact met ons op te nemen. We staan altijd open voor "
 "communicatie en staan klaar om te helpen!"
 
-#: users/templates/about.html:19
+#: templates/about.html:19
 msgid "Contact us:"
 msgstr "Neem contact met ons op:"
 
-#: users/templates/about.html:22
+#: templates/about.html:22
 msgid "Name:"
 msgstr "Naam:"
 
-#: users/templates/about.html:23
+#: templates/about.html:23
 msgid "Your name"
 msgstr "Uw naam"
 
-#: users/templates/about.html:26
+#: templates/about.html:26
 msgid "Email:"
 msgstr "E-mail:"
 
-#: users/templates/about.html:27
+#: templates/about.html:27
 msgid "Your email"
 msgstr "Uw e-mail"
 
-#: users/templates/about.html:30
+#: templates/about.html:30
 msgid "Message:"
 msgstr "Bericht:"
 
-#: users/templates/about.html:31
+#: templates/about.html:31
 msgid "Your message"
 msgstr "Uw bericht"
 
-#: users/templates/about.html:33
+#: templates/about.html:33
 msgid "Send"
 msgstr "Verzenden"
 
-#: users/templates/edit_password.html:3 users/templates/edit_password.html:6
+#: templates/edit_password.html:3 templates/edit_password.html:6
 msgid "Edit password"
 msgstr "Wachtwoord bewerken"
 
-#: users/templates/edit_password.html:10
-#: users/templates/password_change_form.html:14
+#: templates/edit_password.html:10 templates/password_change_form.html:14
+#: templates/profile3.html:41
 msgid "Change password"
 msgstr "Wachtwoord wijzigen"
 
-#: users/templates/edit_profile.html:3 users/templates/edit_profile.html:7
+#: templates/edit_profile.html:3 templates/edit_profile.html:7
 msgid "Edit profile"
 msgstr "Profiel bewerken"
 
-#: users/templates/edit_profile.html:11
+#: templates/edit_profile.html:11
 msgid "Save changes"
 msgstr "Wijzigingen opslaan"
 
-#: users/templates/login.html:5 users/templates/login.html:9
-#: users/templates/pass_reset_complete.html:8
+#: templates/login.html:5 templates/login.html:9
+#: templates/pass_reset_complete.html:8
 msgid "Log in"
 msgstr "Inloggen"
 
-#: users/templates/login.html:10
+#: templates/login.html:10
 msgid "Forgot password?"
 msgstr "Wachtwoord vergeten?"
 
-#: users/templates/pass_reset_complete.html:4
+#: templates/pass_reset_complete.html:4
 msgid "Password is changed!"
 msgstr "Wachtwoord is gewijzigd!"
 
-#: users/templates/pass_reset_complete.html:6
+#: templates/pass_reset_complete.html:6
 msgid "Congratulations!"
 msgstr "Gefeliciteerd!"
 
-#: users/templates/pass_reset_complete.html:7
+#: templates/pass_reset_complete.html:7
 msgid "You have successfully changed your account password. Use it to "
 msgstr "Je hebt met succes je accountwachtwoord gewijzigd. Gebruik het om "
 
-#: users/templates/pass_reset_confirm.html:4
+#: templates/pass_reset_confirm.html:4
 msgid "New password:"
 msgstr "Nieuw wachtwoord:"
 
-#: users/templates/pass_reset_confirm.html:14
+#: templates/pass_reset_confirm.html:14
 msgid "Save"
 msgstr "Save"
 
-#: users/templates/pass_reset_done.html:5
+#: templates/pass_reset_done.html:5
 msgid "Password reset:"
 msgstr "Wachtwoord opnieuw instellen:"
 
-#: users/templates/pass_reset_form.html:4
+#: templates/pass_reset_form.html:4
 msgid "Password reset"
 msgstr "Wachtwoord opnieuw instellen"
 
-#: users/templates/pass_reset_form.html:13
+#: templates/pass_reset_form.html:13
 msgid "Send by email:"
 msgstr "Stuur per e-mail:"
 
-#: users/templates/password_change_done.html:4
+#: templates/password_change_done.html:4
 msgid "Password is successfully changed!"
 msgstr "Wachtwoord is succesvol gewijzigd!"
 
-#: users/templates/password_change_done.html:5
+#: templates/password_change_done.html:5
 msgid "You have changed your password."
 msgstr "U hebt uw wachtwoord gewijzigd."
 
-#: users/templates/password_change_done.html:5
+#: templates/password_change_done.html:5
 msgid "Back to profile."
 msgstr "Terug naar profiel."
 
-#: users/templates/password_change_form.html:4
+#: templates/password_change_form.html:4
 msgid "Change your password:"
 msgstr "Wijzig je wachtwoord:"
 
-#: users/templates/password_reset_email.html:2
+#: templates/password_reset_email.html:2
 #, python-format
 msgid ""
 "You're receiving this email because you requested a password reset for your "
@@ -173,30 +191,108 @@ msgstr ""
 "Je ontvangt deze e-mail omdat je een wachtwoordreset hebt aangevraagd voor "
 "je gebruikersaccount op %(site_name)s."
 
-#: users/templates/password_reset_email.html:4
+#: templates/password_reset_email.html:4
 msgid "Please go to the following page and choose a new password:"
 msgstr "Ga naar de volgende pagina en kies een nieuw wachtwoord:"
 
-#: users/templates/password_reset_email.html:8
+#: templates/password_reset_email.html:8
 msgid "Your username, in case you’ve forgotten:"
 msgstr "Je gebruikersnaam, voor het geval dat je die vergeten bent:"
 
-#: users/templates/password_reset_email.html:10
+#: templates/password_reset_email.html:10
 msgid "Thanks for using our site!"
 msgstr "Bedankt voor het gebruik van onze site!"
 
-#: users/templates/password_reset_email.html:12
+#: templates/password_reset_email.html:12
 #, python-format
 msgid "The %(site_name)s team"
 msgstr "Het %(site_name)s team"
 
-#: users/templates/registration.html:5
+#: templates/profile3.html:7
+#, fuzzy
+#| msgid "Edit profile"
+msgid "Profile"
+msgstr "Profiel bewerken"
+
+#: templates/profile3.html:10
+#, fuzzy
+#| msgid "Edit profile"
+msgid "Your profile"
+msgstr "Profiel bewerken"
+
+#: templates/profile3.html:16
+#, fuzzy
+#| msgid "Name:"
+msgid "Name"
+msgstr "Naam:"
+
+#: templates/profile3.html:20
+#, fuzzy
+#| msgid "Your name"
+msgid "Surname"
+msgstr "Uw naam"
+
+#: templates/profile3.html:24
+#, fuzzy
+#| msgid "Email:"
+msgid "Email"
+msgstr "E-mail:"
+
+#: templates/profile3.html:28
+msgid "Number"
+msgstr "Nummer"
+
+#: templates/profile3.html:35
+msgid "Your account status"
+msgstr "uw accountstatus"
+
+#: templates/profile3.html:37
+#, fuzzy
+#| msgid "Edit profile"
+msgid "Edit profile data"
+msgstr "Profiel bewerken"
+
+#: templates/profile3.html:46
+msgid "Your records statistics"
+msgstr "Statistieken van uw records"
+
+#: templates/profile3.html:47
+msgid "Edit"
+msgstr "bewerken"
+
+#: templates/profile3.html:57
+msgid "Location name"
+msgstr "Locatienaam"
+
+#: templates/profile3.html:59
+msgid "Media amount"
+msgstr "Aantal mediabestanden"
+
+#: templates/profile3.html:69
+msgid ""
+"To be able to manage information on the web-site your account should be "
+"approved by administrator."
+msgstr ""
+"Om informatie op de website te kunnen beheren moet je account "
+"goedgekeurd zijn door de beheerder."
+
+#: templates/profile3.html:70
+#, fuzzy
+#| msgid "Thanks for using our site!"
+msgid "Thanks for understanding."
+msgstr "Bedankt voor het gebruik van onze site!"
+
+#: templates/profile3.html:75
+msgid ""
+"As you already uploaded documents you should just wait for confirmation. If "
+"we would need anything more, we will contact you by provided email."
+msgstr ""
+"Aangezien je al documenten hebt geüpload, moet je gewoon wachten op bevestiging. Als "
+"we nog iets nodig hebben, nemen we contact met je op via de opgegeven e-mail."
+
+#: templates/registration.html:5
 msgid "Register here:"
 msgstr "Registreer hier:"
-
-#: users/templates/registration.html:17
-msgid "Submit"
-msgstr "Stuur in"
 
 #~ msgid ""
 #~ "    This project is a non-commercial educational project created to "

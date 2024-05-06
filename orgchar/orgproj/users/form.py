@@ -35,11 +35,9 @@ class UserProfileForm(ModelForm):
 
 
 class ProfileUserForm(forms.ModelForm):
-    email = forms.CharField(label='E-mail', widget=forms.TextInput(attrs={'class': 'form-input'}))
-
     class Meta:
         model = get_user_model()
-        fields = ['email', 'first_name', 'last_name']
+        fields = ['first_name', 'last_name']
         labels = {
             'first_name': 'Имя',
             'last_name': 'Фамилия',
@@ -57,9 +55,12 @@ class UserPasswordChangeForm(PasswordChangeForm):
                                     widget=forms.PasswordInput(attrs={'class': 'form-input'}))
 
 
+class UploadFileForm(forms.Form):
+    file = forms.FileField(label="PDF document", required=True)
+
+
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(label="Email", required=True)
-    file = forms.FileField(label="PDF document", required=True)
 
     class Meta:
         model = User

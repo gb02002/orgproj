@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block head %}<link rel="stylesheet" type="text/css" href="{% static 'css/tree.css' %}">{% endblock %}
+{% block title %}{% trans 'Profile' %}{% endblock %}
+
+{% block content %}
+    <h2 style="text-align: center;">{% trans 'Your profile' %}</h2>
+
+    <div class="profile-container">
+        <div class="profile-info">
+            <table>
+                <tr>
+                    <th>{% trans 'Name' %}:</th>
+                    <td>{{ users_data.name }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans 'Surname' %}:</th>
+                    <td>{{ users_data.surname }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans 'Email' %}:</th>
+                    <td>{{ users_data.email }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans 'Number' %}:</th>
+                    <td>{{ users_data.phone }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="edit-link">
+            <p>{% trans 'Your account status' %}: {{users_data.status}} <img src="{{ users_data.status_icon }}" width="5%" height="5%"></p>
+
+            <p><a href="{% url 'profile_edit'%}">{% trans 'Edit profile data' %}</a></p>
+            {% if users_data.status == 'None' %}
+                <p><a href="{% url 'upload-documents' %}">{% trans 'Upload documents' %}</a></p>
+            {% endif %}
+            <p><a href="{% url 'password_change' %}">{% trans 'Change password' %}</a></p>
+        </div>
+    </div>
+
+{% if users_data.status == 'confirmed' %}
+    <h3>{% trans 'Your records statistics' %}</h3>
+    <p class="centered-link"><a href="{% url 'edit-choice' %}">{% trans 'Edit' %}</a></p>
+
+    <div class="organisation-tree">
+        <ul class="organisation-tree-list">
+            {% for organisation in users_data.organisations.all %}
+                <li class="organisation-title">{{ organisation.title }}</li>
+                {% if organisation.locations.all %}
+                    <ul class="location-tree-list">
+                        {% for location in organisation.locations.all %}
+                            <li>
+                                {% trans 'Location name' %}: {{ location.location_name|truncatechars:40 }}
+                                <ul class="location-tree-media-list">
+                                    <li class="location-media">{% trans 'Media amount' %} - {{ location.media.count }}</li>
+                                </ul>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+{% else %}
+    <h3>{% trans 'To be able to manage information on the web-site your account should be approved by administrator.' %}</h3>
+    <h4 style="text-align: center;">{% trans 'Thanks for understanding.' %}</h4>
+
+        {% if users_data.status == 'None' %}
+            <p style="text-align: center;"><a href="{% url 'upload-documents' %}">{% trans 'Upload documents' %}</a></p>
+        {% elif users_data.status == 'pending' %}
+            <h5 style="text-align: center;"> {% trans 'As you already uploaded documents you should just wait for confirmation. If we would need anything more, we will contact you by provided email.' %}</h5>
+    {% endif %}
+{% endif %}
+{% endblock %}
