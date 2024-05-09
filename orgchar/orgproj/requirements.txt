@@ -1,36 +1,36 @@
-amqp==5.2.0
-asgiref==3.7.2
-bcrypt==4.1.2
-bidict==0.22.1
-billiard==4.2.0
-cachetools==5.3.2
-celery==5.4.0
-click==8.1.7
-click-didyoumean==0.3.1
-click-plugins==1.1.1
-click-repl==0.3.0
-Django==5.0.2
-django-debug-toolbar==4.3.0
-django-extensions==3.2.3
-django-map-widgets==0.4.2
-django-osm-field==0.5.0
-django-redis==5.4.0
-djangorestframework==3.14.0
-Faker==24.4.0
-gunicorn==22.0.0
-kombu==5.3.7
-packaging==24.0
-pillow==10.2.0
-pip==24.0
-prompt-toolkit==3.0.43
-psycopg2==2.9.9
-python-dateutil==2.9.0.post0
-pytz==2024.1
-redis==5.0.3
-six==1.16.0
-sqlparse==0.4.4
-tzdata==2024.1
-ujson==5.9.0
-uuid7==0.1.0
-vine==5.1.0
-wcwidth==0.2.13
+amqp                 5.2.0
+asgiref              3.7.2
+bcrypt               4.1.2
+bidict               0.22.1
+billiard             4.2.0
+cachetools           5.3.2
+celery               5.4.0
+click                8.1.7
+click-didyoumean     0.3.1
+click-plugins        1.1.1
+click-repl           0.3.0
+Django               5.0.2
+django-debug-toolbar 4.3.0
+django-extensions    3.2.3
+django-map-widgets   0.4.2
+django-osm-field     0.5.0
+django-redis         5.4.0
+djangorestframework  3.14.0
+Faker                24.4.0
+gunicorn             22.0.0
+kombu                5.3.7
+packaging            24.0
+pillow               10.2.0
+pip                  24.0
+prompt-toolkit       3.0.43
+psycopg2             2.9.9
+python-dateutil      2.9.0.post0
+pytz                 2024.1
+redis                5.0.3
+six                  1.16.0
+sqlparse             0.4.4
+tzdata               2024.1
+ujson                5.9.0
+uuid7                0.1.0
+vine                 5.1.0
+wcwidth              0.2.13
