@@ -18,4 +18,5 @@ doc.md
 docker-compose.yml
 /logging/
 *.conf.py
-
+/media_data/
+*.sh
