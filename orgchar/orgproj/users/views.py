@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db import IntegrityError
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, get_user_model
 from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordResetView
@@ -21,6 +23,14 @@ class CustomLogin(LoginView):
     template_name = "login.html"
     success_url = reverse_lazy('map')
     redirect_authenticated_user = False  # Change to True after debug
+
+    def form_valid(self, form):
+        """Valid form with redirect"""
+        response = super().form_valid(form)
+        next_url = self.request.GET.get('next')
+        if next_url:
+            return HttpResponseRedirect(next_url)
+        return response
 
 
 def logout_view(request):
@@ -76,21 +86,25 @@ def registration_view(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST, request.FILES)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.username = user.email
-            user.save()
+            try:
+                user = form.save(commit=False)
+                user.username = user.email
+                user.save()
+                profile = UserProfile.objects.create(profile=user)
 
-            profile = UserProfile.objects.create(profile=user)
+                profile.save()
+                login(request, user)
 
-            user.profile = profile
-            profile.save()
+                messages.success(request, "Registration is done")
 
-            login(request, user)
-
-            messages.success(request, "Registration is done")
-
-            return redirect('map')
+                return redirect('map')
+            except IntegrityError:
+                messages.error(request, 'This email address is already in use.')
+                return render(request, 'registration.html',
+                              context={"form": form, "error_message": "This email address is already in use."})
         else:
+            # Форма недействительна, отображаем ее с сообщениями об ошибках
+            messages.error(request, 'Invalid form submission.')
             return render(request, 'registration.html', context={"form": form})
     else:
         form = CustomUserCreationForm(request.POST, request.FILES)

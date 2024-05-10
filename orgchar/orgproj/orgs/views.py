@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect
 from django.core.serializers import serialize
 from django.http import JsonResponse, Http404, HttpResponseRedirect
@@ -216,11 +217,11 @@ class OrganisationDetailView(DetailView):
         return obj
 
 
-class ChoiceEditView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
+class ChoiceEditView(UserPassesTestMixin, TemplateView):
     """Шаблонный класс который выдает информацию о всех сущностях и предоставляет редакцию, добавление и удаление"""
     template_name = 'editing_choice.html'
     context_object_name = 'orgs'
-
+    redirect_field_name = 'next'
     # model = Organisation
 
     def get_context_data(self, **kwargs):
@@ -246,13 +247,37 @@ class ChoiceEditView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
         return response
 
     def test_func(self):
-        """Test for mixin"""
-        profile = self.request.user.profile
-        return profile.is_org_agent == 'confirmed'
+        """Correct logic applies. Two checks: is_auth and account_level"""
+        if self.request.user.is_authenticated:
+            profile = self.request.user.profile
+            if profile.is_org_agent != 'confirmed':
+                self.request.test_mixin_failed = True
+                return False
+            return True
+        self.request.login_required = True
+        return False
 
-    def handle_no_permission(self):
-        """Fail for mixin"""
-        return redirect('profile1')
+    def handle_no_permission(self, login_required=False, test_mixin_required=False):
+        """Right split."""
+
+        if getattr(self.request, 'login_required', False):
+            return redirect('login')
+        elif getattr(self.request, 'test_mixin_failed', False):
+            return redirect('profile1')
+        else:
+            return redirect('map')
+
+
+    # def dispatch(self, request, *args, **kwargs):
+    #     try:
+    #         # Попытка выполнить представление
+    #         return super().dispatch(request, *args, **kwargs)
+    #     except PermissionDenied as e:
+    #         if isinstance(e, LoginRequiredMixin):
+    #             self.login_required = True
+    #         elif isinstance(e, UserPassesTestMixin):
+    #             self.test_mixin_required = True
+    #         return self.handle_no_permission()
 
 
 # class AddOrgView(LoginRequiredMixin, FormView):
