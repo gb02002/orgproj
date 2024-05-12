@@ -56,7 +56,7 @@ class StatsMiddleware:
         # request part
         response = self.get_response(request)
         # response
-        if 'lo/api' or 'static' in request.path_info:
+        if 'lo/api' in request.path_info or 'static' in request.path_info:
             return response
         if self.rdc:
             try:
