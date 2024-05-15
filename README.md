@@ -11,7 +11,7 @@ The reason I picked this topic is due to my opinion that charity world is comple
 
 1. [Technology Stack](tech_stack.md) 
 
-2. Analytics report
+2. [Analytics report](analysis.md)
 
 2. [Journal](dev-journal.md)
 
@@ -26,4 +26,8 @@ This prooject is issued with licence.
 
 ## How to contribute:
 
-If you are thinking about it - thank you! A guide can be found [here][somelink].
+If you are thinking about it - thank you! 
+Here are some ways you can get started:
+
+Report bugs: If you encounter any bugs, please let us know. Open up an issue and let us know the problem.
+Documentation: If you see the need for some additional documentation, feel free to add some!
