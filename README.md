@@ -9,13 +9,14 @@ The reason I picked this topic is due to my opinion that charity world is comple
 
 ## Table of contents(features):
 
-1. [Technology Stack](ссылка_на_технологии.md) 
+1. [Technology Stack](tech_stack.md) 
 
 2. Analytics report
 
-2. [Journal](ссылка_на_журнал.md)
+2. [Journal](dev-journal.md)
 
-4. [Current bugs](ссылка_на_баги.md)
+4. [Current bugs](current_bugs.md)
+
 ## How to install and run: 
 
 Installation is common for github, you can simply clone repository. Further installation is usual for Django as well. If you are not familiar with it, a more precise guide can be found [here][somelink].
