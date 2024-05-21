@@ -5,7 +5,9 @@
 
 Welcome to our project! This is a README file for a non-commercial project that was designed to learn a particular technology stack ultimately formed around Django for Python. It allows user to find a location of a certain charity organisation on the map and gain information about them. 
 
-The reason I picked this topic is due to my opinion that charity world is complex and it is hard to get into it. With this project you would be able to have an easy start with observation what do you have around you for a quick takeoff)
+The reason I picked this topic is due to my opinion that charity world is complex and it is hard to get into it. With this project you would be able to have an easy start with observation what do you have around you for a quick takeoff).
+
+You can rich this application via www.charitynl.cfd or http://89.169.52.8/.
 
 ## Table of contents(features):
 
